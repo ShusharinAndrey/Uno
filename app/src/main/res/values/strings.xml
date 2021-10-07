@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Uno</string>
     <string name="uno">UNO</string>
+    <string name="card_aspect_ratio">142:211</string>
 </resources>

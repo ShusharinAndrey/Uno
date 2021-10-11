@@ -55,7 +55,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         return cards.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+   static class ViewHolder extends RecyclerView.ViewHolder {
         final View card;
         final View available;
 

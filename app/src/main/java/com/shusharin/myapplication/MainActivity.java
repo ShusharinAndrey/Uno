@@ -24,26 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        cards.clear();
-        for (int j = 0; j < 4; j++) {
-            for (int i = 0; i <= 12; i++) {
-                switch (j) {
-                    case 1:
-                        cards.add(new CardViewer(new Card(CardWithColor.values()[i], Color.BLUE)));
-                        break;
-                    case 2:
-                        cards.add(new CardViewer(new Card(CardWithColor.values()[i], Color.RED)));
-                        break;
-                    case 3:
-                        cards.add(new CardViewer(new Card(CardWithColor.values()[i], Color.YELLOW)));
-                        break;
-                    case 4:
-                        cards.add(new CardViewer(new Card(CardWithColor.values()[i], Color.GREEN)));
-                        break;
-
-                }
-            }
-        }
+        createDeck();
 
         cards.get(0).setAvailable(false);
         cards.get(3).setAvailable(false);
@@ -54,6 +35,31 @@ public class MainActivity extends AppCompatActivity {
             cards.add(new CardViewer(new Card(SpecialCardWithBlack.CHANGE_COLOR)));
         }
 
+    }
+
+    private void createDeck() {
+        cards.clear();
+        for (int j = 0; j < 4; j++) {
+            for (int i = 0; i <= 12; i++) {
+                for (int k = 0; k < 2; k++) {
+                    switch (j) {
+                        case 1:
+                            cards.add(new CardViewer(new Card(CardWithColor.values()[i], Color.BLUE)));
+                            break;
+                        case 2:
+                            cards.add(new CardViewer(new Card(CardWithColor.values()[i], Color.RED)));
+                            break;
+                        case 3:
+                            cards.add(new CardViewer(new Card(CardWithColor.values()[i], Color.YELLOW)));
+                            break;
+                        case 4:
+                            cards.add(new CardViewer(new Card(CardWithColor.values()[i], Color.GREEN)));
+                            break;
+
+                    }
+                }
+            }
+        }
     }
 
     @Override

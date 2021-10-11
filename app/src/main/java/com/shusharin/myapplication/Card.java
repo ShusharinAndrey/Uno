@@ -1,11 +1,6 @@
 package com.shusharin.myapplication;
 
-import static com.shusharin.myapplication.MainActivity.getIdDrawable;
-
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
+import androidx.annotation.NonNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -47,7 +42,17 @@ enum Color {
 
 @AllArgsConstructor
 @Getter
-enum SpecialCardWithColor {
+enum CardWithColor {
+    ZERO(0),
+    ONE(1),
+    TWO(2),
+    THREE(3),
+    FOUR(4),
+    FIVE(5),
+    SIX(6),
+    SEVEN(7),
+    EIGHT(8),
+    NINE(9),
     SKIPPING_MOVE(10),
     CHANGE_ORDER_MOVE(11),
     TAKE_2_CARDS(12);
@@ -62,44 +67,25 @@ enum SpecialCardWithBlack {
     private final int id;
 }
 
+@Getter
 public class Card {
-    private final Context context;
     private final int id;
     private final Color color;
 
-    public Card(Context context, int id, Color color) {
-        this.context = context;
+    public Card(@NonNull CardWithColor cardWithColor, Color color) {
 
-        this.id = Math.max(0, Math.min(id, 9));
+        this.id = cardWithColor.getId();
 
-        //Или лучше ошибку выдавть?
+        //Или лучше ошибку выдавать?
         this.color = color == Color.BLACK ? Color.BLUE : color;
     }
 
-    public Card(Context context, SpecialCardWithColor specialCardWithColor, Color color) {
-        this.context = context;
-
-        this.id = specialCardWithColor.getId();
-
-        //Или лучше ошибку выдавть?
-        this.color = color == Color.BLACK ? Color.BLUE : color;
-    }
-
-    public Card(Context context, SpecialCardWithBlack specialCardWithBlack) {
-        this.context = context;
+    public Card(@NonNull SpecialCardWithBlack specialCardWithBlack) {
 
         this.id = specialCardWithBlack.getId();
 
-        //Или лучше ошибку выдавть?
+        //Или лучше ошибку выдавать?
         this.color = Color.BLACK;
-    }
-
-    @SuppressLint("UseCompatLoadingForDrawables")
-    Drawable getDrawable() {
-        return new LayerDrawable(new Drawable[]{
-                context.getResources().getDrawable(color.getIdDrawable(), context.getTheme()),
-                context.getResources().getDrawable(R.drawable.border, context.getTheme()),
-                context.getResources().getDrawable(getIdDrawable(context, "card_" + id), context.getTheme())});
     }
 
 }

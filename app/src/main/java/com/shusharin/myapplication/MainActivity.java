@@ -1,17 +1,19 @@
 package com.shusharin.myapplication;
 
+import static com.shusharin.myapplication.CardsDeck.cards;
+
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    View cardView;
-    View cardView1;
-    View cardView2;
-    View cardView3;
+    static CardViewer cardViewer = null;
+    private boolean isPressed = false;
 
     public static int getIdDrawable(Context context, String name) {
         return context.getResources().getIdentifier(name, "drawable", context.getPackageName());
@@ -22,18 +24,59 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Card card = new Card(this,  SpecialCardWithBlack.TAKE_4_CARDS_AND_CHANGE_COLOR);
-        Card card1 = new Card(this,  SpecialCardWithColor.CHANGE_ORDER_MOVE, Color.BLUE);
-        Card card2 = new Card(this,  6, Color.GREEN);
-        Card card3 = new Card(this,  2, Color.RED);
+        createDeck();
 
-        cardView = findViewById(R.id.card);
-        cardView1 = findViewById(R.id.card1);
-        cardView2 = findViewById(R.id.card2);
-        cardView3 = findViewById(R.id.card3);
-        cardView.setBackground(card.getDrawable());
-        cardView1.setBackground(card1.getDrawable());
-        cardView2.setBackground(card2.getDrawable());
-        cardView3.setBackground(card3.getDrawable());
+        cards.get(0).setAvailable(false);
+        cards.get(3).setAvailable(false);
+        cards.get(11).setAvailable(false);
+
+        for (int i = 0; i < 2; i++) {
+            cards.add(new CardViewer(new Card(SpecialCardWithBlack.TAKE_4_CARDS_AND_CHANGE_COLOR)));
+            cards.add(new CardViewer(new Card(SpecialCardWithBlack.CHANGE_COLOR)));
+        }
+
+    }
+
+    private void createDeck() {
+        cards.clear();
+        for (int j = 0; j < 4; j++) {
+            for (int i = 0; i <= 12; i++) {
+                for (int k = 0; k < 2; k++) {
+                    switch (j) {
+                        case 1:
+                            cards.add(new CardViewer(new Card(CardWithColor.values()[i], Color.BLUE)));
+                            break;
+                        case 2:
+                            cards.add(new CardViewer(new Card(CardWithColor.values()[i], Color.RED)));
+                            break;
+                        case 3:
+                            cards.add(new CardViewer(new Card(CardWithColor.values()[i], Color.YELLOW)));
+                            break;
+                        case 4:
+                            cards.add(new CardViewer(new Card(CardWithColor.values()[i], Color.GREEN)));
+                            break;
+
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (cardViewer != null) {
+            findViewById(R.id.card).setBackground(cardViewer.getDrawable(this));
+        }
+    }
+
+    public void onClickPlay(View view) {
+        if (!isPressed) {
+            isPressed = true;
+            Intent intent = new Intent(MainActivity.this, CardsDeck.class);
+            startActivity(intent);
+            overridePendingTransition(0, 0);
+            new Handler().postDelayed(() -> isPressed = false, 250);
+        }
     }
 }

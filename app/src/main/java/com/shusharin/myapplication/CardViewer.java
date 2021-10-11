@@ -9,9 +9,11 @@ import android.graphics.drawable.LayerDrawable;
 
 import java.io.Serializable;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public class CardViewer implements Serializable {
     private final Card card;
     private boolean isAvailable;

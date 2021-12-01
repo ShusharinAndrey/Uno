@@ -1,22 +1,22 @@
-#Uno game rules
+# Uno game rules
 
-##Components
+## Components
+ 
+* 112 cards as follows:
+* 20 Blue cards - 0 to 9
+* 20 Green cards - 0 to 9
+* 20 Red cards - 0 to 9
+* 20 Yellow cards - 0 to 9
+* 8 Skip cards - 2 each in Blue, Green, Red and Yellow
+* 8 Reverse cards - 2 each in Blue, Green, Red and Yellow
+* 8 Draw 2 cards - 2 each in Blue, Green, Red and Yellow
+* 4 Wild cards
+* 4 Wild Draw 4 cards
 
-*   *112 cards as follows:
-    *20 Blue cards - 0 to 9
-    *20 Green cards - 0 to 9
-    *20 Red cards - 0 to 9
-    *20 Yellow cards - 0 to 9
-    *8 Skip cards - 2 each in Blue, Green, Red and Yellow
-    *8 Reverse cards - 2 each in Blue, Green, Red and Yellow
-    *8 Draw 2 cards - 2 each in Blue, Green, Red and Yellow
-    *4 Wild cards
-    *4 Wild Draw 4 cards
-
-##Object of the Game
+## Object of the Game
 The first player to play all of the cards in their hand wins the game
 
-##Setup
+## Setup
 Each player draws a card. Player with the highest point value is the dealer. Shuffle the deck. Each player is dealt 7 cards.
 
 Place the remaining cards facedown to form a draw pile. 
@@ -24,7 +24,7 @@ Turn over the top card of the draw pile to begin a discard pile.
 If the top card is a Wild or Wild Draw 4, return it to the deck and pick another card. 
 For all other cards, see directions that follow.
 
-##Special Cards
+## Special Cards
 
 * Draw 2 Card
 When you play this card, the next person to play must draw 2 cards and forfeit his/her turn.
@@ -65,6 +65,6 @@ You can only play this card when you don't have a card in your hand
 that matches the color of the card previously played. 
 If turned up at the beginning of play, return this card to the deck and pick another card.
 
-##Game Play
+## Game Play
 The players perform the actions of the card played by the previous player.
 Then they lay down one of their cards corresponding to the color or value of the previous card.

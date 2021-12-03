@@ -5,7 +5,7 @@ import java.util.Vector;
 
 public class Bot
 {
-    private Vector<Card> hand_;
+    private Vector<Card> hand;
     private int countOfBlue;
     private int countOfGreen;
     private int countOfYellow;
@@ -13,12 +13,12 @@ public class Bot
 
     public Bot()
     {
-        this.hand_ = new Vector<>();
+        this.hand = new Vector<>();
     }
 
     private void colorQuantity()
     {
-        for(Card cards: hand_)
+        for(Card cards: hand)
         {
             switch(cards.getColor())
             {

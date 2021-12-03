@@ -5,7 +5,7 @@ import java.util.Vector;
 
 public class Bot
 {
-    private Vector<Card> hand;
+    private CardsDeck hand;
     private int countOfBlue;
     private int countOfGreen;
     private int countOfYellow;
@@ -13,14 +13,14 @@ public class Bot
 
     public Bot()
     {
-        this.hand = new Vector<>();
+        this.hand = null;
     }
 
     private void colorQuantity()
     {
-        for(Card cards: hand)
+        for(CardViewer cards: hand.cards)
         {
-            switch(cards.getColor())
+            switch(cards.getCard().getColor())
             {
                 case BLUE:
                     countOfBlue++;
@@ -36,7 +36,9 @@ public class Bot
                     break;
             }
         }
+        int max = Math.max(Math.max(countOfBlue, countOfGreen), Math.max(countOfRed, countOfYellow));
     }
+
 
 
 }

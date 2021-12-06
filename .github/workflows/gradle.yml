@@ -11,10 +11,12 @@ on:
   push:
     branches: 
       - main
+      - Artem
     
   pull_request:
     branches:
       - main
+      - Artem
 
 jobs:
   my_testing:

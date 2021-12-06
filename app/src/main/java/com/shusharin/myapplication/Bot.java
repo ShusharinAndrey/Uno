@@ -51,5 +51,8 @@ public class Bot
         }
     }
 
-
+    private CardViewer turn(CardViewer card)
+    {
+        return card;
+    }
 }

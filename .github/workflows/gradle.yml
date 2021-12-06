@@ -18,7 +18,7 @@ on:
 
 jobs:
   my_testing:
-    runs-on: windows
+    runs-on: ubuntu-latest
     steps:
     - name: Print Hello Message
       run: echo "Hello World, it's Uno!"

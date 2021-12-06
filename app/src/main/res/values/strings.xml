@@ -1,5 +1,9 @@
 <resources>
-    <string name="app_name">Uno</string>
-    <string name="uno">UNO</string>
-    <string name="card_aspect_ratio">142:211</string>
+    <string name="app_name" translatable="false">Uno</string>
+    <string name="uno" translatable="false">UNO</string>
+    <string name="card_aspect_ratio" translatable="false">142:211</string>
+    <string name="title_continue">Загрузка</string>
+    <string name="Move_rules_Text">Правила тут будут</string>
+    <string name="Move_rules">Основные</string>
+    <string name="Game">Игра</string>
 </resources>

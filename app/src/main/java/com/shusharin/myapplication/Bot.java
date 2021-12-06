@@ -39,6 +39,17 @@ public class Bot
         int max = Math.max(Math.max(countOfBlue, countOfGreen), Math.max(countOfRed, countOfYellow));
     }
 
+    private void getCards()
+    {
+        int missingCards = 7 - hand.cards.size();
+        if(missingCards != 0)
+        {
+            for(int i = 0; i < missingCards; i++)
+            {
+                //hand.cards.add(givenList.get(rand.nextInt(givenList.size()))); //дополняем руку из колоды
+            }
+        }
+    }
 
 
 }

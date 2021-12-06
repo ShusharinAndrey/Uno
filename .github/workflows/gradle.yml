@@ -10,27 +10,15 @@ name: Java CI with Gradle
 on:
   push:
     branches: 
-      -"main"
-      -"dev"
-      -"Andrey"
-      -"Nikolay"
-      -"Artem"
-      -"Misha"
+      - main
     
   pull_request:
     branches:
-      -"main"
-      -"dev"
-      -"Andrey"
-      -"Nikolay"
-      -"Artem"
-      -"Misha"
+      - main
 
 jobs:
-  build:
-
+  my_testing:
     runs-on: windows
-
     steps:
     - name: Print Hello Message
       run: echo "Hello World, it's Uno!"

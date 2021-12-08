@@ -6,4 +6,20 @@
     <string name="Move_rules_Text">Правила тут будут</string>
     <string name="Move_rules">Основные</string>
     <string name="Game">Игра</string>
+    <string name="title_activity_reference">Reference</string>
+    <string name="title_activity_main">Main menu</string>
+    <string name="title_activity_new_game">New Game</string>
+    <string name="single">Single</string>
+    <string name="multiplayer">multiplayer</string>
+    <string name="open">Open</string>
+    <string name="Party">Partie</string>
+    <string name="enter_stoke" translatable="false">\u0020: \n%s</string>
+    <string name="Players">Игроков %d</string>
+    <string name="Generalities">Основные</string>
+    <string name="twoPlayer">Два игрока</string>
+    <string name="threePlayer">Три игрока</string>
+    <string name="fourPlayer">Четыре игрока</string>
+    <string name="newGame">Новая игра</string>
+    <string name="continueGame">Продоложить</string>
+    <string name="reference">Справка</string>
 </resources>

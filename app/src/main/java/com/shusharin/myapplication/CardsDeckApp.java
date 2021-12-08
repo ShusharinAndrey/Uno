@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class CardsDeck extends AppCompatActivity {
+public class CardsDeckApp extends AppCompatActivity {
     public static ArrayList<CardViewer> cards = new ArrayList<>();
     private static int numberSelectionCard = 0;
     private static AlertDialog dialog;
@@ -25,7 +25,7 @@ public class CardsDeck extends AppCompatActivity {
     }
 
     public static void toCard(int numberSelectionCard) {
-        CardsDeck.numberSelectionCard = numberSelectionCard;
+        CardsDeckApp.numberSelectionCard = numberSelectionCard;
         showDialog();
     }
 

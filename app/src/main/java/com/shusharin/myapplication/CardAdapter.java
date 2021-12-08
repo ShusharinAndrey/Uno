@@ -31,7 +31,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         viewInGroup.setOnClickListener(view1 -> {
             int position = holder.getAdapterPosition();
             if (cards.get(position).isAvailable()) {
-                CardsDeck.toCard(position);
+                CardsDeckApp.toCard(position);
             }
         });
 

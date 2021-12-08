@@ -3,29 +3,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingDefaultResource">
     <item
-        android:id="@+id/Generalities"
-        android:title="@string/Generalities"
+        android:id="@+id/Components"
+        android:title="@string/components"
+        android:visible="true">
+    </item>
+    <item
+        android:id="@+id/Object_of_the_game"
+        android:title="@string/object_of_the_game"
+        android:visible="true">
+    </item>
+    <item
+        android:id="@+id/Setup"
+        android:title="@string/setup"
+        android:visible="true">
+    </item>
+    <item
+        android:id="@+id/Special_cards"
+        android:title="@string/special_cards"
         android:visible="true">
         <menu>
             <item
-                android:id="@+id/Move_rules"
-                android:title="@string/Move_rules" />
-<!--            <item-->
-<!--                android:id="@+id/Condition_of_victory"-->
-<!--                android:title="@string/Condition_of_victory" />-->
+                android:id="@+id/Draw_2_card"
+                android:title="@string/draw_2_card"
+                android:visible="true">
+            </item>
+            <item
+                android:id="@+id/Reverse_card"
+                android:title="@string/reverse_card"
+                android:visible="true">
+            </item>
+            <item
+                android:id="@+id/Skip_card"
+                android:title="@string/skip_card"
+                android:visible="true">
+            </item>
+            <item
+                android:id="@+id/Wild_card"
+                android:title="@string/wild_card"
+                android:visible="true">
+            </item>
+            <item
+                android:id="@+id/Wild_draw_4_card"
+                android:title="@string/wild_draw_4_card"
+                android:visible="true">
+            </item>
         </menu>
     </item>
-<!--    <item-->
-<!--        android:id="@+id/Three_field"-->
-<!--        android:title="@string/Rules_game_on_three_fields"-->
-<!--        android:visible="true">-->
-<!--        <menu>-->
-<!--            <item-->
-<!--                android:id="@+id/Two_player"-->
-<!--                android:title="@string/Two_player" />-->
-<!--            <item-->
-<!--                android:id="@+id/Three_player"-->
-<!--                android:title="@string/Three_player" />-->
-<!--        </menu>-->
-<!--    </item>-->
+    <item
+        android:id="@+id/Game_play"
+        android:title="@string/game_play"
+        android:visible="true">
+    </item>
 </menu>

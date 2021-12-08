@@ -2,4 +2,25 @@
 <resources>
     <string name="title_activity_reference">Reference</string>
     <string name="Game">Game</string>
+    <string name="components">Components</string>
+    <string name="components_text">"* 112 cards as follows: \n* 20 Blue cards - 0 to 9 \n* 20 Green cards - 0 to 9 \n* 20 Red cards - 0 to 9 \n* 20 Yellow cards - 0 to 9 \n* 8 Skip cards - 2 each in Blue, Green, Red and Yellow \n* 8 Reverse cards - 2 each in Blue, Green, Red and Yellow \n* 8 Draw 2 cards - 2 each in Blue, Green, Red and Yellow \n* 4 Wild cards \n* 4 Wild Draw 4 cards "</string>
+    <string name="object_of_the_game">Object of the game</string>
+    <string name="object_of_the_game_text">The first player to play all of the cards in their hand wins the game</string>
+    <string name="setup">Setup</string>
+    <string name="setup_text">Each player draws a card. Player with the highest point value is the dealer. Shuffle the deck. Each player is dealt 7 cards.  \n\nPlace the remaining cards facedown to form a draw pile.  Turn over the top card of the draw pile to begin a discard pile.  If the top card is a Wild or Wild Draw 4, return it to the deck and pick another card.  For all other cards, see directions that follow.</string>
+    <string name="special_cards">Special cards</string>
+    <string name="game_play">Game play</string>
+    <string name="game_play_text">The players perform the actions of the card played by the previous player. \nThen they lay down one of their cards corresponding to the color or value of the previous card.</string>
+    <string name="draw_2_card">Draw 2 card</string>
+    <string name="draw_2_card_text">When you play this card, the next person to play must draw 2 cards and forfeit his/her turn.  \n\nIf this card is turned up at the beginning of play, the first player must draw two cards.  \n\nThis card may only be played on a matching color or on another Draw 2 card.</string>
+    <string name="reverse_card">Reverse card</string>
+    <string name="reverse_card_text">This card reverses direction of play. \nPlay to the left now passes to the right, and vice versa.  \n\nIf this card is turned up at the beginning of play, the player to the right now plays first, \nand play then goes to the right instead of left.  \n\nThis card may only be played on a matching color or on another Reverse card.  \n</string>
+    <string name="skip_card">Skip card</string>
+    <string name="skip_card_text">The next person in line to play after this card is played loses his/her turn and is \"skipped\".  \n\nIf this card is turned up at the beginning of play, \nthe first player (the player to the left of the dealer) is skipped.  \n\nThis card may only be played on a matching color or on another Skip card.  \n</string>
+    <string name="wild_card">Wild card</string>
+    <string name="wild_card_text">When you play this card, you may change the color being played \nto any color (including the current color) to continue play.  \nYou may play a Wild card even if you have another playable card in hand.  \n\nIf this card is turned up at the beginning of play,  \nthe person to the left of the dealer chooses the color to begin play and plays the first card.</string>
+    <string name="wild_draw_4_card">Wild draw 4 card</string>
+    <string name="wild_draw_4_card_text">This card allows you to call the next color played and  \nrequires the next player to pick 4 cards from the DRAW pile and forfeit his/her turn.  \n\nYou can only play this card when you don\'t have a card in your hand \nthat matches the color of the card previously played.  \nIf turned up at the beginning of play, return this card to the deck and pick another card.</string>
+    <string name="uno_game_rules">Uno game rules</string>
+    <string name="reference">Uno game rules</string>
 </resources>

@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ReferenceApp.hideNavigationBar(getWindow(), Objects.requireNonNull(getSupportActionBar()));
+        getSupportActionBar().setCustomView(R.layout.title_layout);
         TextView text = findViewById(R.id.tvTitle);
         text.setText(R.string.title_activity_main);
     }

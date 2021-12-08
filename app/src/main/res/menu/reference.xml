@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+    <item
+        android:id="@+id/Generalities"
+        android:title="@string/Generalities"
+        android:visible="true">
+        <menu>
+            <item
+                android:id="@+id/Move_rules"
+                android:title="@string/Move_rules" />
+<!--            <item-->
+<!--                android:id="@+id/Condition_of_victory"-->
+<!--                android:title="@string/Condition_of_victory" />-->
+        </menu>
+    </item>
+<!--    <item-->
+<!--        android:id="@+id/Three_field"-->
+<!--        android:title="@string/Rules_game_on_three_fields"-->
+<!--        android:visible="true">-->
+<!--        <menu>-->
+<!--            <item-->
+<!--                android:id="@+id/Two_player"-->
+<!--                android:title="@string/Two_player" />-->
+<!--            <item-->
+<!--                android:id="@+id/Three_player"-->
+<!--                android:title="@string/Three_player" />-->
+<!--        </menu>-->
+<!--    </item>-->
+</menu>

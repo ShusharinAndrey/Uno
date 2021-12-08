@@ -59,7 +59,7 @@ public class ReferenceApp extends AppCompatActivity {
         }
         getSupportActionBar().setCustomView(R.layout.title_layout);
         TextView text = findViewById(R.id.tvTitle);
-        text.setText(R.string.title_activity_reference);
+        text.setText(R.string.uno_game_rules);
     }
 
     @Override
@@ -73,9 +73,41 @@ public class ReferenceApp extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
 //            Здесь надо будет вставить правила в формате
-            case R.id.Move_rules:
-                title.setText(R.string.Move_rules);
-                text.setText(R.string.Move_rules_Text);
+            case R.id.Components:
+                title.setText(R.string.components);
+                text.setText(R.string.components_text);
+                return true;
+            case R.id.Object_of_the_game:
+                title.setText(R.string.object_of_the_game);
+                text.setText(R.string.object_of_the_game_text);
+                return true;
+            case R.id.Setup:
+                title.setText(R.string.setup);
+                text.setText(R.string.setup_text);
+                return true;
+            case R.id.Draw_2_card:
+                title.setText(R.string.draw_2_card);
+                text.setText(R.string.draw_2_card_text);
+                return true;
+            case R.id.Reverse_card:
+                title.setText(R.string.reverse_card);
+                text.setText(R.string.reverse_card_text);
+                return true;
+            case R.id.Skip_card:
+                title.setText(R.string.skip_card);
+                text.setText(R.string.skip_card_text);
+                return true;
+            case R.id.Wild_card:
+                title.setText(R.string.wild_card);
+                text.setText(R.string.wild_card_text);
+                return true;
+            case R.id.Wild_draw_4_card:
+                title.setText(R.string.wild_draw_4_card);
+                text.setText(R.string.wild_draw_4_card_text);
+                return true;
+            case R.id.Game_play:
+                title.setText(R.string.game_play);
+                text.setText(R.string.game_play_text);
                 return true;
 //             Где всместо Move_rules названия заголовков/подзаголовков
 //            сами заголовки ещё нало будет создать в файле menu/reference.xml

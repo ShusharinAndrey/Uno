@@ -5,7 +5,7 @@ import java.util.Vector;
 
 public class Bot
 {
-    private CardsDeck hand;
+    private ArrayList<CardViewer> hand;
     private int countOfBlue;
     private int countOfGreen;
     private int countOfYellow;
@@ -18,7 +18,7 @@ public class Bot
 
     private void colorQuantity()
     {
-        for(CardViewer cards: hand.cards)
+        for(CardViewer cards: hand)
         {
             switch(cards.getCard().getColor())
             {
@@ -41,12 +41,12 @@ public class Bot
 
     private void getCards()
     {
-        int missingCards = 7 - hand.cards.size();
+        int missingCards = 7 - hand.size();
         if(missingCards != 0)
         {
             for(int i = 0; i < missingCards; i++)
             {
-                //hand.cards.add(givenList.get(rand.nextInt(givenList.size()))); //дополняем руку из колоды
+//hand.cards.add(givenList.get(rand.nextInt(givenList.size()))); //дополняем руку из колоды
             }
         }
     }

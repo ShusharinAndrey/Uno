@@ -5,11 +5,19 @@ on:
     branches: 
       - main
       - Artem
+      - dev
+      - Andrey
+      - Nikolay
+      - Misha
     
   pull_request:
     branches:
       - main
       - Artem
+      - dev
+      - Andrey
+      - Nikolay
+      - Misha
 
 jobs:
   my_testing:

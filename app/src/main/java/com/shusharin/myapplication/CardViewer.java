@@ -1,7 +1,5 @@
 package com.shusharin.myapplication;
 
-import static com.shusharin.myapplication.MainActivity.getIdDrawable;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -23,12 +21,16 @@ public class CardViewer implements Serializable {
         isAvailable = true;
     }
 
+    public static int getIdDrawable(Context context, String name) {
+        return context.getResources().getIdentifier(name, "drawable", context.getPackageName());
+    }
+
     public void setAvailable(boolean available) {
         isAvailable = available;
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    Drawable getDrawable(Context context) {
+    public Drawable getDrawable(Context context) {
         return new LayerDrawable(new Drawable[]{
                 context.getResources().getDrawable(card.getColor().getIdDrawable(), context.getTheme()),
                 context.getResources().getDrawable(R.drawable.border, context.getTheme()),

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/frame"
+        android:layout_width="410dp"
+        android:layout_height="350dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/text_frame"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/frame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.05"
+        app:layout_constraintWidth_percent="0.95"
+        app:srcCompat="@drawable/text_frame" />
+
+    <TextView
+        android:id="@+id/nameGame"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="5dp"
+        android:text="Партия"
+        android:visibility="visible"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeMinTextSize="1sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@id/player"
+        app:layout_constraintEnd_toEndOf="@id/text_frame"
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintStart_toStartOf="@id/text_frame"
+        app:layout_constraintTop_toTopOf="@id/text_frame" />
+
+    <TextView
+        android:id="@+id/player"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="5dp"
+        android:text="Количество Игроков"
+        android:visibility="visible"
+        app:autoSizeMaxTextSize="20sp"
+        app:autoSizeMinTextSize="1sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/mode"
+        app:layout_constraintEnd_toEndOf="@id/text_frame"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/mode"
+        app:layout_constraintTop_toBottomOf="@+id/nameGame" />
+
+    <TextView
+        android:id="@+id/mode"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="5dp"
+        android:text="Режим"
+        app:autoSizeMaxTextSize="20sp"
+        app:autoSizeMinTextSize="1sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@id/text_frame"
+        app:layout_constraintEnd_toStartOf="@+id/player"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/text_frame"
+        app:layout_constraintTop_toBottomOf="@+id/nameGame"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/negative"
+        style="@style/button_style"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Отмена"
+        app:autoSizeMaxTextSize="20sp"
+        app:autoSizeMinTextSize="1sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/positive"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <Button
+        android:id="@+id/positive"
+        style="@style/button_style"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Выбор"
+        app:autoSizeMaxTextSize="20sp"
+        app:autoSizeMinTextSize="1sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/negative"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/negative"
+        app:layout_constraintTop_toTopOf="@+id/negative"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <RadioGroup
+        android:id="@+id/quantityPlayers"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:checkedButton="@id/twoPlayer"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        app:layoutManager="ConstraintLayout"
+        app:layout_constraintBottom_toTopOf="@+id/negative"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_frame">
+
+
+        <RadioButton
+            android:id="@+id/twoPlayer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/twoPlayer" />
+
+        <RadioButton
+            android:id="@+id/threePlayer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/threePlayer" />
+
+        <RadioButton
+            android:id="@+id/fourPlayer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/fourPlayer" />
+    </RadioGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

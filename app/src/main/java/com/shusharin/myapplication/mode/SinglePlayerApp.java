@@ -62,6 +62,10 @@ public class SinglePlayerApp extends AppCompatActivity {
     }
 
     protected CardViewer peekCard() {
+        return peekCard(0);
+    }
+
+    protected CardViewer peekCard(int index) {
         CardViewer cardView = deck.get(0);
         deck.remove(0);
         return cardView;
@@ -76,14 +80,14 @@ public class SinglePlayerApp extends AppCompatActivity {
         CardViewer card;
         for (int i = 0; i < deck.size(); i++) {
             int index = random.nextInt(i + 1);
-            card = deck.get(index);
-            deck.add(index, deck.get(i));
+            card = peekCard(index);
+            deck.add(index, peekCard(i));
             deck.add(i, card);
         }
     }
 
     protected void handOutCard() {
-        for (int i = 0; i <= quantityStartCard; i++) {
+        for (int i = 0; i < quantityStartCard; i++) {
             player.addCardsInHand(peekCard());
             bot.addCardsInHand(peekCard());
         }

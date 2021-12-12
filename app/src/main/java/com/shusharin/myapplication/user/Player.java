@@ -8,6 +8,6 @@ import java.util.Collections;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-public class Player implements Playable {
+public class Player extends Playable {
 
 }

@@ -1,19 +1,23 @@
-package com.shusharin.myapplication;
+package com.shusharin.myapplication.card;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 
+import com.shusharin.myapplication.R;
+
 import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @AllArgsConstructor
 public class CardViewer implements Serializable {
     private final Card card;
+    @Setter
     private boolean isAvailable;
 
     public CardViewer(Card card) {
@@ -23,10 +27,6 @@ public class CardViewer implements Serializable {
 
     public static int getIdDrawable(Context context, String name) {
         return context.getResources().getIdentifier(name, "drawable", context.getPackageName());
-    }
-
-    public void setAvailable(boolean available) {
-        isAvailable = available;
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")

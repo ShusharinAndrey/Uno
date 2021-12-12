@@ -17,7 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CardsDeckApp" />
+        <activity android:name=".card.CardsDeckApp" />
         <activity android:name=".selected_games.NewGameApp" />
         <activity android:name=".selected_games.ContinueApp" />
         <activity android:name=".ReferenceApp" />

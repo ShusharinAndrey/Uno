@@ -1,4 +1,4 @@
-package com.shusharin.myapplication;
+package com.shusharin.myapplication.card;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -10,10 +10,14 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.shusharin.myapplication.MainActivity;
+import com.shusharin.myapplication.R;
+import com.shusharin.myapplication.mode.SinglePlayerApp;
+
 import java.util.ArrayList;
 
 public class CardsDeckApp extends AppCompatActivity {
-    public static ArrayList<CardViewer> cards = new ArrayList<>();
+    private static ArrayList<CardViewer> cards = null;
     private static int numberSelectionCard = 0;
     private static AlertDialog dialog;
     private static boolean isDialogShow = false;
@@ -22,6 +26,10 @@ public class CardsDeckApp extends AppCompatActivity {
     private static void showDialog() {
         isDialogShow = true;
         dialog.show();
+    }
+
+    public static void setCards(ArrayList<CardViewer> cards) {
+        CardsDeckApp.cards = cards;
     }
 
     public static void toCard(int numberSelectionCard) {
@@ -51,8 +59,10 @@ public class CardsDeckApp extends AppCompatActivity {
             if (!isPressed) {
                 isPressed = true;
                 //передать numberSelectionCard
-                MainActivity.cardViewer = cards.get(numberSelectionCard);
+                SinglePlayerApp.table.add(cards.get(numberSelectionCard));
+                SinglePlayerApp.cardOnTheTable.setBackground(cards.get(numberSelectionCard).getDrawable(SinglePlayerApp.cardOnTheTable.getContext()));
                 cards.remove(numberSelectionCard);
+                cards = null;
                 finish();
                 overridePendingTransition(0, 0);
                 isDialogShow = false;

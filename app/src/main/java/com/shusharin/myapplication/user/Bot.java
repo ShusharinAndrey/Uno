@@ -1,6 +1,6 @@
 package com.shusharin.myapplication.user;
 
-import com.shusharin.myapplication.CardViewer;
+import com.shusharin.myapplication.card.CardViewer;
 
 import java.util.ArrayList;
 import java.util.Collections;

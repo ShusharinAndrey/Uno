@@ -4,14 +4,14 @@ import com.shusharin.myapplication.card.CardViewer;
 
 import java.util.ArrayList;
 
-public interface Playable {
+public abstract class Playable {
     ArrayList<CardViewer> cardsInHand = new ArrayList<>();
 
-    default ArrayList<CardViewer> getCardsInHand() {
+    public ArrayList<CardViewer> getCardsInHand() {
         return cardsInHand;
     }
 
-    default void addCardsInHand(CardViewer card) {
+    public void addCardsInHand(CardViewer card) {
         this.cardsInHand.add(card);
     }
 

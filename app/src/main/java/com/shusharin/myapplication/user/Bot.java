@@ -8,7 +8,7 @@ import java.util.Collections;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-public class Bot implements Playable {
+public class Bot extends Playable {
 
     private int countOfBlue;
     private int countOfGreen;

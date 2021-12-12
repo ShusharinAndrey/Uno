@@ -1,27 +1,24 @@
-package com.shusharin.myapplication;
+package com.shusharin.myapplication.user;
+
+import com.shusharin.myapplication.CardViewer;
 
 import java.util.ArrayList;
-import java.util.Vector;
+import java.util.Collections;
 
-public class Bot
-{
-    private ArrayList<CardViewer> hand;
+public class Bot implements Playable {
+
     private int countOfBlue;
     private int countOfGreen;
     private int countOfYellow;
     private int countOfRed;
 
-    public Bot()
-    {
-        this.hand = null;
+    public Bot(ArrayList<CardViewer> cardsInHand) {
+        Collections.copy(this.cardsInHand,cardsInHand);
     }
 
-    private void colorQuantity()
-    {
-        for(CardViewer cards: hand)
-        {
-            switch(cards.getCard().getColor())
-            {
+    private void colorQuantity() {
+        for (CardViewer cardInHand : cardsInHand) {
+            switch (cardInHand.getCard().getColor()) {
                 case BLUE:
                     countOfBlue++;
                     break;
@@ -38,18 +35,5 @@ public class Bot
         }
         int max = Math.max(Math.max(countOfBlue, countOfGreen), Math.max(countOfRed, countOfYellow));
     }
-
-    private void getCards()
-    {
-        int missingCards = 7 - hand.size();
-        if(missingCards != 0)
-        {
-            for(int i = 0; i < missingCards; i++)
-            {
-//hand.cards.add(givenList.get(rand.nextInt(givenList.size()))); //дополняем руку из колоды
-            }
-        }
-    }
-
 
 }

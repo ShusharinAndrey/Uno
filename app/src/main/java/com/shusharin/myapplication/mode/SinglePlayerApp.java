@@ -18,6 +18,7 @@ import com.shusharin.myapplication.card.CardViewer;
 import com.shusharin.myapplication.card.CardWithColor;
 import com.shusharin.myapplication.card.CardsDeckApp;
 import com.shusharin.myapplication.card.Color;
+import com.shusharin.myapplication.card.SpecialCardWithBlack;
 import com.shusharin.myapplication.selected_games.ContinueApp;
 
 import java.util.ArrayList;
@@ -84,11 +85,19 @@ public class SinglePlayerApp extends AppCompatActivity {
                 }
             }
         }
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < SpecialCardWithBlack.values().length; j++) {
+                deck.add(new CardViewer(new Card(SpecialCardWithBlack.values()[j])));
+            }
+        }
     }
 
     public void onClickHand(View view) {
         if (!isPressed) {
             isPressed = true;
+            //Здесь вместо deck должны быть карты игрока с уже установленым правильно флагом isAvailable
+            CardsDeckApp.setCards(deck);
             Intent intent = new Intent(this, CardsDeckApp.class);
             startActivity(intent);
             overridePendingTransition(0, 0);

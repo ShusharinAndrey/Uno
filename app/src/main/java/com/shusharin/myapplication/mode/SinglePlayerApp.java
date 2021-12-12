@@ -18,6 +18,7 @@ import com.shusharin.myapplication.card.CardViewer;
 import com.shusharin.myapplication.card.CardWithColor;
 import com.shusharin.myapplication.card.CardsDeckApp;
 import com.shusharin.myapplication.card.Color;
+import com.shusharin.myapplication.selected_games.ContinueApp;
 
 import java.util.ArrayList;
 
@@ -26,8 +27,8 @@ public class SinglePlayerApp extends AppCompatActivity {
     protected static final int quantityStartCard = 7;
     public static ArrayList<CardViewer> table = new ArrayList<>();
     public static View cardOnTheTable;
+    protected static Conservation conservation;
     protected SharedPreferences preferences;
-    protected Conservation conservation;
     protected View cardsInHand;
     protected TextView quantityCardsInHand;
     protected boolean isPressed = false;
@@ -42,6 +43,8 @@ public class SinglePlayerApp extends AppCompatActivity {
         quantityCardsInHand = findViewById(R.id.quantityCardsInHand);
 
         preferences = getSharedPreferences(getIntent().getStringExtra("GAME"), Context.MODE_PRIVATE);
+
+        conservation = ContinueApp.conservations.get(getIntent().getIntExtra("NUMBER_CONSERVATION", 0));
 
         createDeck();
         mixDeck();

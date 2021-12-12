@@ -115,8 +115,9 @@ public class ContinueApp extends AppCompatActivity {
                     intent = new Intent(this, MultiPlayerApp.class);
                 }
 
+                intent.putExtra("GAME", conservation.getName());
                 intent.putExtra("NUMBER_CONSERVATION", ContinueApp.conservations.indexOf(conservation));
-                intent.putExtra("IS_FINISHED", conservation.isFinished());
+
                 startActivity(intent);
                 finish();
                 overridePendingTransition(0, 0);

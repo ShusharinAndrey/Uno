@@ -140,7 +140,7 @@ public class ContinueApp extends AppCompatActivity {
             TextView modeText = viewDialog.findViewById(R.id.mode);
             TextView numberPlayerText = viewDialog.findViewById(R.id.player);
             nameGameText.setText(String.format(getString(R.string.Party) + getString(R.string.enter_stoke), conservation.getName()));
-            numberPlayerText.setText(String.format(getString(R.string.Players), conservation.getNumberPlayer()));
+            numberPlayerText.setText(String.format(getString(R.string.Players), conservation.getQuantityPlayer()));
             modeText.setText(conservation.getMode().getString());
         });
         dialog.setOnCancelListener(arg0 -> closeDialog(viewDialog));

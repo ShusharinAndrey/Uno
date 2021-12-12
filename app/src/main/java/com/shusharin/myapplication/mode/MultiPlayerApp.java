@@ -1,41 +1,39 @@
 package com.shusharin.myapplication.mode;
 
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import com.shusharin.myapplication.card.CardsDeckApp;
+import com.shusharin.myapplication.card.CardViewer;
+import com.shusharin.myapplication.selected_games.ContinueApp;
 import com.shusharin.myapplication.user.Player;
 
 import java.util.ArrayList;
 
 public class MultiPlayerApp extends SinglePlayerApp {
-    private ArrayList<Player> players;
+    private final ArrayList<Player> players = new ArrayList<>();
 
+    public static void afterSelectingCard() {
+        startTurn.setVisibility(View.VISIBLE);
+        blackView.setVisibility(View.VISIBLE);
+        blackCardsInHand.setVisibility(View.VISIBLE);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        preferences = getSharedPreferences(getIntent().getStringExtra("GAME"), Context.MODE_PRIVATE);
+        conservation = ContinueApp.conservations.get(getIntent().getIntExtra("NUMBER_CONSERVATION", 0));
+
         for (int i = 0; i < conservation.getQuantityPlayer(); i++) {
             players.add(new Player());
         }
+        super.onCreate(savedInstanceState);
     }
 
-
-    @Override
-    public void onClickHand(View view) {
-        if (!isPressed) {
-            isPressed = true;
-            setAvailableCards(players.get(conservation.getNumberPlayer()).getCardsInHand());
-            CardsDeckApp.setCards(players.get(conservation.getNumberPlayer()).getCardsInHand());
-            Intent intent = new Intent(this, CardsDeckApp.class);
-            startActivity(intent);
-            overridePendingTransition(0, 0);
-            new Handler().postDelayed(() -> isPressed = false, 250);
-        }
+    protected ArrayList<CardViewer> getCardsInHandCurrentPlayer() {
+        return players.get(conservation.getNumberPlayer()).getCardsInHand();
     }
 
     @Override
@@ -48,6 +46,17 @@ public class MultiPlayerApp extends SinglePlayerApp {
     }
 
     public void giveNextTurn() {
+        if(conservation.getNumberPlayer() < conservation.getQuantityPlayer()-1){
+            conservation.setNumberPlayer(conservation.getNumberPlayer()+1);
+        }else{
+            conservation.setNumberPlayer(0);
+        }
+        //if специальная карта
     }
 
+    @Override
+    public void onClickStartTurn(View view) {
+        giveNextTurn();
+        super.onClickStartTurn(view);
+    }
 }

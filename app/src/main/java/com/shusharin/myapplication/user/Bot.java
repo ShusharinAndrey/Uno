@@ -5,16 +5,15 @@ import com.shusharin.myapplication.card.CardViewer;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class Bot implements Playable {
 
     private int countOfBlue;
     private int countOfGreen;
     private int countOfYellow;
     private int countOfRed;
-
-    public Bot(ArrayList<CardViewer> cardsInHand) {
-        Collections.copy(this.cardsInHand,cardsInHand);
-    }
 
     private void colorQuantity() {
         for (CardViewer cardInHand : cardsInHand) {

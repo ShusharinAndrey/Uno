@@ -20,8 +20,11 @@ import com.shusharin.myapplication.card.CardsDeckApp;
 import com.shusharin.myapplication.card.Color;
 import com.shusharin.myapplication.card.SpecialCardWithBlack;
 import com.shusharin.myapplication.selected_games.ContinueApp;
+import com.shusharin.myapplication.user.Bot;
+import com.shusharin.myapplication.user.Player;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class SinglePlayerApp extends AppCompatActivity {
     protected static final ArrayList<CardViewer> deck = new ArrayList<>();
@@ -33,6 +36,8 @@ public class SinglePlayerApp extends AppCompatActivity {
     protected View cardsInHand;
     protected TextView quantityCardsInHand;
     protected boolean isPressed = false;
+    private Player player = new Player();
+    private Bot bot = new Bot();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,12 +72,20 @@ public class SinglePlayerApp extends AppCompatActivity {
     }
 
     protected void mixDeck() {
-
+        Random random = new Random();
+        CardViewer card;
+        for (int i = 0; i < deck.size(); i++) {
+            int index = random.nextInt(i + 1);
+            card = deck.get(index);
+            deck.add(index, deck.get(i));
+            deck.add(i, card);
+        }
     }
 
     protected void handOutCard() {
         for (int i = 0; i <= quantityStartCard; i++) {
-
+            player.addCardsInHand(peekCard());
+            bot.addCardsInHand(peekCard());
         }
     }
 
@@ -96,12 +109,23 @@ public class SinglePlayerApp extends AppCompatActivity {
     public void onClickHand(View view) {
         if (!isPressed) {
             isPressed = true;
-            //Здесь вместо deck должны быть карты игрока с уже установленым правильно флагом isAvailable
-            CardsDeckApp.setCards(deck);
+            setAvailableCards(player.getCardsInHand());
+            CardsDeckApp.setCards(player.getCardsInHand());
             Intent intent = new Intent(this, CardsDeckApp.class);
             startActivity(intent);
             overridePendingTransition(0, 0);
             new Handler().postDelayed(() -> isPressed = false, 250);
+        }
+    }
+
+    protected void setAvailableCards(ArrayList<CardViewer> cards) {
+        CardViewer cardOnTheTable = getCardOnTheTable();
+        for (int i = 0; i < cards.size(); i++) {
+            cards.get(i).setAvailable(
+                    cards.get(i).getCard().getColor() == cardOnTheTable.getCard().getColor()
+                            || cards.get(i).getCard().getId() == cardOnTheTable.getCard().getId()
+                            || cards.get(i).getCard().getColor() == Color.BLACK
+            );
         }
     }
 }

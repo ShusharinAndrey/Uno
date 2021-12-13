@@ -1,4 +1,4 @@
-package com.shusharin.myapplication;
+package com.shusharin.myapplication.card;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.shusharin.myapplication.R;
 
 import java.util.List;
 

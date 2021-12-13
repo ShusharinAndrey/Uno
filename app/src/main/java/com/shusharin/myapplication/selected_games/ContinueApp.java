@@ -115,8 +115,9 @@ public class ContinueApp extends AppCompatActivity {
                     intent = new Intent(this, MultiPlayerApp.class);
                 }
 
+                intent.putExtra("GAME", conservation.getName());
                 intent.putExtra("NUMBER_CONSERVATION", ContinueApp.conservations.indexOf(conservation));
-                intent.putExtra("IS_FINISHED", conservation.isFinished());
+
                 startActivity(intent);
                 finish();
                 overridePendingTransition(0, 0);
@@ -139,7 +140,7 @@ public class ContinueApp extends AppCompatActivity {
             TextView modeText = viewDialog.findViewById(R.id.mode);
             TextView numberPlayerText = viewDialog.findViewById(R.id.player);
             nameGameText.setText(String.format(getString(R.string.Party) + getString(R.string.enter_stoke), conservation.getName()));
-            numberPlayerText.setText(String.format(getString(R.string.Players), conservation.getNumberPlayer()));
+            numberPlayerText.setText(String.format(getString(R.string.Players), conservation.getQuantityPlayer()));
             modeText.setText(conservation.getMode().getString());
         });
         dialog.setOnCancelListener(arg0 -> closeDialog(viewDialog));

@@ -26,11 +26,7 @@ public class NewGameApp extends MainActivity {
     private static boolean isDialogShow = false;
     protected Button singlePlayer;
     protected Button multiPlayer;
-    protected Button twoPlayer;
-    protected Button threePlayer;
-    protected Button fourPlayer;
     protected EditText editNameGame;
-    //    protected Button back;
     private AlertDialog dialog;
     private Intent intent;
     private boolean isPressed = false;
@@ -58,13 +54,13 @@ public class NewGameApp extends MainActivity {
     }
 
 
-    @SuppressLint({"InflateParams", "UseCompatLoadingForDrawables"})
+    @SuppressLint({"InflateParams", "UseCompatLoadingForDrawables", "NonConstantResourceId"})
     private void onCreateDialog() {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
         View viewDialog = inflater.inflate(R.layout.dialog_game_name, null);
-        viewDialog.setBackground(getResources().getDrawable(R.color.grey,getTheme()));
+        viewDialog.setBackground(getResources().getDrawable(R.color.grey, getTheme()));
         builder.setView(viewDialog);
 
         viewDialog.findViewById(R.id.positive).setOnClickListener(arg0 -> {
@@ -120,11 +116,11 @@ public class NewGameApp extends MainActivity {
             }
             modeText.setText(conservation.getMode().getString());
         });
-        dialog.setOnCancelListener(arg0 -> closeDialog(viewDialog));
-        dialog.setOnDismissListener(arg0 -> closeDialog(viewDialog));
+        dialog.setOnCancelListener(arg0 -> closeDialog());
+        dialog.setOnDismissListener(arg0 -> closeDialog());
     }
 
-    private void closeDialog(View viewDialog) {
+    private void closeDialog() {
         isDialogShow = false;
         new Handler().postDelayed(() -> isPressed = false, 100);
     }
@@ -134,35 +130,31 @@ public class NewGameApp extends MainActivity {
         dialog.show();
     }
 
-
     public void onClickSinglePlayer(View view) {
-        if (!isPressed) {
-            isPressed = true;
-            intent = new Intent(NewGameApp.this, SinglePlayerApp.class);
-            setMode(Conservation.Modes.SINGLE);
-        }
+        setMode(Conservation.Modes.SINGLE, SinglePlayerApp.class);
     }
 
     public void onClickMultiPlayer(View view) {
-        if (!isPressed) {
-            isPressed = true;
-            intent = new Intent(NewGameApp.this, MultiPlayerApp.class);
-            setMode(Conservation.Modes.MULTIPLAYER);
-        }
+        setMode(Conservation.Modes.MULTIPLAYER, MultiPlayerApp.class);
     }
 
-    private void setMode(Conservation.Modes mode) {
-        String saveName = !editNameGame.getText().toString().equals("") ? editNameGame.getText().toString() : editNameGame.getHint().toString();
-        int number = -1;
-        for (int i = 0; i < ContinueApp.conservations.size(); i++) {
-            if (saveName.equals(ContinueApp.conservations.get(i).getNameNoNumber())) {
-                if (number < ContinueApp.conservations.get(i).getNumberName()) {
-                    number = ContinueApp.conservations.get(i).getNumberName();
+    private void setMode(Conservation.Modes mode, Class<?> cls) {
+        if (!isPressed) {
+            isPressed = true;
+            intent = new Intent(NewGameApp.this, cls);
+            String saveName = !editNameGame.getText().toString().equals("") ? editNameGame.getText().toString() : editNameGame.getHint().toString();
+            int number = -1;
+            for (int i = 0; i < ContinueApp.conservations.size(); i++) {
+                if (saveName.equals(ContinueApp.conservations.get(i).getNameNoNumber())) {
+                    if (number < ContinueApp.conservations.get(i).getNumberName()) {
+                        number = ContinueApp.conservations.get(i).getNumberName();
+                    }
                 }
             }
+            conservation = new Conservation(saveName, number == -1 ? 0 : number + 1, false, mode);
+            conservation.setQuantityPlayer(2);
+            showDialog();
         }
-        conservation = new Conservation(saveName, number == -1 ? 0 : number + 1, false, mode);
-        showDialog();
     }
 
 }

@@ -10,8 +10,9 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.shusharin.myapplication.MainActivity;
+import com.shusharin.myapplication.Conservation;
 import com.shusharin.myapplication.R;
+import com.shusharin.myapplication.mode.MultiPlayerApp;
 import com.shusharin.myapplication.mode.SinglePlayerApp;
 
 import java.util.ArrayList;
@@ -20,11 +21,9 @@ public class CardsDeckApp extends AppCompatActivity {
     private static ArrayList<CardViewer> cards = null;
     private static int numberSelectionCard = 0;
     private static AlertDialog dialog;
-    private static boolean isDialogShow = false;
     private boolean isPressed;
 
     private static void showDialog() {
-        isDialogShow = true;
         dialog.show();
     }
 
@@ -61,11 +60,20 @@ public class CardsDeckApp extends AppCompatActivity {
                 //передать numberSelectionCard
                 SinglePlayerApp.table.add(cards.get(numberSelectionCard));
                 SinglePlayerApp.cardOnTheTable.setBackground(cards.get(numberSelectionCard).getDrawable(SinglePlayerApp.cardOnTheTable.getContext()));
+
                 cards.remove(numberSelectionCard);
+
+                SinglePlayerApp.cardsInHand.setBackground(cards.get(0).getDrawable(this));
+                SinglePlayerApp.quantityCardsInHand.setText(String.valueOf(cards.size()));
+
                 cards = null;
                 finish();
                 overridePendingTransition(0, 0);
-                isDialogShow = false;
+                if (SinglePlayerApp.conservation.getMode() == Conservation.Modes.SINGLE) {
+                    SinglePlayerApp.afterSelectingCard();
+                } else {
+                    MultiPlayerApp.afterSelectingCard();
+                }
                 new Handler().postDelayed(() -> isPressed = false, 250);
             }
         });
@@ -74,7 +82,6 @@ public class CardsDeckApp extends AppCompatActivity {
             if (!isPressed) {
                 isPressed = true;
                 dialog.dismiss();
-                isDialogShow = false;
                 new Handler().postDelayed(() -> isPressed = false, 100);
             }
         });
@@ -93,6 +100,5 @@ public class CardsDeckApp extends AppCompatActivity {
     }
 
     private void closeDialog() {
-        isDialogShow = false;
     }
 }

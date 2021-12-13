@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -31,13 +32,20 @@ public class SinglePlayerApp extends AppCompatActivity {
     protected static final int quantityStartCard = 7;
     public static ArrayList<CardViewer> table = new ArrayList<>();
     public static View cardOnTheTable;
-    protected static Conservation conservation;
+    public static Conservation conservation;
+    public static View cardsInHand;
+    public static TextView quantityCardsInHand;
+    protected static View blackView;
+    protected static View blackCardsInHand;
+    protected static Button startTurn;
+    private final Player player = new Player();
+    private final Bot bot = new Bot();
     protected SharedPreferences preferences;
-    protected View cardsInHand;
-    protected TextView quantityCardsInHand;
     protected boolean isPressed = false;
-    private Player player = new Player();
-    private Bot bot = new Bot();
+
+    public static void afterSelectingCard() {
+//Бот ходит здесь
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,6 +55,9 @@ public class SinglePlayerApp extends AppCompatActivity {
         cardOnTheTable = findViewById(R.id.cardOnTheTable);
         cardsInHand = findViewById(R.id.cardsInHand);
         quantityCardsInHand = findViewById(R.id.quantityCardsInHand);
+        blackView = findViewById(R.id.blackView);
+        blackCardsInHand = findViewById(R.id.blackCardsInHand);
+        startTurn = findViewById(R.id.startTurn);
 
         preferences = getSharedPreferences(getIntent().getStringExtra("GAME"), Context.MODE_PRIVATE);
 
@@ -61,13 +72,22 @@ public class SinglePlayerApp extends AppCompatActivity {
         cardOnTheTable.setBackground(getCardOnTheTable().getDrawable(this));
     }
 
+    protected ArrayList<CardViewer> getCardsInHandCurrentPlayer() {
+        return player.getCardsInHand();
+    }
+
+    protected void setBackgroundHand() {
+        cardsInHand.setBackground(getCardsInHandCurrentPlayer().get(0).getDrawable(this));
+        quantityCardsInHand.setText(String.valueOf(getCardsInHandCurrentPlayer().size()));
+    }
+
     protected CardViewer peekCard() {
         return peekCard(0);
     }
 
     protected CardViewer peekCard(int index) {
-        CardViewer cardView = deck.get(0);
-        deck.remove(0);
+        CardViewer cardView = deck.get(index);
+        deck.remove(index);
         return cardView;
     }
 
@@ -78,7 +98,7 @@ public class SinglePlayerApp extends AppCompatActivity {
     protected void mixDeck() {
         Random random = new Random();
         CardViewer card;
-        for (int i = 0; i < deck.size(); i++) {
+        for (int i = 0; i < deck.size() - 1; i++) {
             int index = random.nextInt(i + 1);
             card = peekCard(index);
             deck.add(index, peekCard(i));
@@ -113,8 +133,8 @@ public class SinglePlayerApp extends AppCompatActivity {
     public void onClickHand(View view) {
         if (!isPressed) {
             isPressed = true;
-            setAvailableCards(player.getCardsInHand());
-            CardsDeckApp.setCards(player.getCardsInHand());
+            setAvailableCards(getCardsInHandCurrentPlayer());
+            CardsDeckApp.setCards(getCardsInHandCurrentPlayer());
             Intent intent = new Intent(this, CardsDeckApp.class);
             startActivity(intent);
             overridePendingTransition(0, 0);
@@ -131,5 +151,16 @@ public class SinglePlayerApp extends AppCompatActivity {
                             || cards.get(i).getCard().getColor() == Color.BLACK
             );
         }
+    }
+
+    public void onClickNo(View view) {
+
+    }
+
+    public void onClickStartTurn(View view) {
+        startTurn.setVisibility(View.GONE);
+        blackView.setVisibility(View.GONE);
+        blackCardsInHand.setVisibility(View.GONE);
+        setBackgroundHand();
     }
 }

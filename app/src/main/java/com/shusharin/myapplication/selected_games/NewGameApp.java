@@ -152,6 +152,7 @@ public class NewGameApp extends MainActivity {
                 }
             }
             conservation = new Conservation(saveName, number == -1 ? 0 : number + 1, false, mode);
+            conservation.setQuantityPlayer(2);
             showDialog();
         }
     }

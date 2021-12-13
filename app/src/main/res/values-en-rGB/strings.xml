@@ -23,4 +23,5 @@
     <string name="wild_draw_4_card_text">This card allows you to call the next color played and  \nrequires the next player to pick 4 cards from the DRAW pile and forfeit his/her turn.  \n\nYou can only play this card when you don\'t have a card in your hand \nthat matches the color of the card previously played.  \nIf turned up at the beginning of play, return this card to the deck and pick another card.</string>
     <string name="uno_game_rules">Uno game rules</string>
     <string name="reference">Uno game rules</string>
+    <string name="start_turn">Начать ход</string>
 </resources>

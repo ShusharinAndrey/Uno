@@ -1,6 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/cardOnTheTable"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:foreground="@drawable/card_foreground"
+        app:layout_constraintBottom_toTopOf="@+id/cardsInHand"
+        app:layout_constraintDimensionRatio="@string/card_aspect_ratio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.7" />
+
+    <View
+        android:id="@+id/cardsInHand"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:foreground="@drawable/card_foreground"
+        android:onClick="onClickHand"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="@string/card_aspect_ratio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardOnTheTable"
+        app:layout_constraintWidth_percent="0.2"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <View
+        android:id="@+id/blackCardsInHand"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:foreground="@color/black"
+        android:onClick="onClickHand"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/cardsInHand"
+        app:layout_constraintDimensionRatio="@string/card_aspect_ratio"
+        app:layout_constraintEnd_toEndOf="@+id/cardsInHand"
+        app:layout_constraintStart_toStartOf="@+id/cardsInHand"
+        app:layout_constraintTop_toTopOf="@+id/cardsInHand"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/quantityCardsInHand"
+        style="@style/text_style"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardsInHand"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintStart_toEndOf="@+id/cardsInHand"
+        app:layout_constraintTop_toTopOf="@+id/cardsInHand"
+        app:autoSizeMaxTextSize="220sp"
+        app:autoSizeMinTextSize="1sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintWidth_percent="0.15" />
+
+    <View
+        android:id="@+id/blackView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/Button"
+        android:onClick="onClickNo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/startTurn"
+        style="@style/button_style"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:onClick="onClickStartTurn"
+        android:text="@string/start_turn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

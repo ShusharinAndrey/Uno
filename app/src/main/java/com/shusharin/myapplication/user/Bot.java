@@ -2,13 +2,10 @@ package com.shusharin.myapplication.user;
 
 import com.shusharin.myapplication.card.CardViewer;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-public class Bot extends Playable {
+public class Bot extends Player {
 
     private int countOfBlue;
     private int countOfGreen;

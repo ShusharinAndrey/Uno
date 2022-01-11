@@ -3,11 +3,16 @@ package com.shusharin.myapplication.user;
 import com.shusharin.myapplication.card.CardViewer;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
-import lombok.NoArgsConstructor;
+public abstract class Player {
+    ArrayList<CardViewer> cardsInHand = new ArrayList<>();
 
-@NoArgsConstructor
-public class Player extends Playable {
+    public ArrayList<CardViewer> getCardsInHand() {
+        return cardsInHand;
+    }
+
+    public void addCardsInHand(CardViewer card) {
+        this.cardsInHand.add(card);
+    }
 
 }

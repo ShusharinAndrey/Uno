@@ -8,12 +8,12 @@ import androidx.annotation.Nullable;
 
 import com.shusharin.myapplication.card.CardViewer;
 import com.shusharin.myapplication.selected_games.ContinueApp;
-import com.shusharin.myapplication.user.Player;
+import com.shusharin.myapplication.user.Human;
 
 import java.util.ArrayList;
 
 public class MultiPlayerApp extends SinglePlayerApp {
-    private final ArrayList<Player> players = new ArrayList<>();
+    private final ArrayList<Human> players = new ArrayList<>();
 
     public static void afterSelectingCard() {
         startTurn.setVisibility(View.VISIBLE);
@@ -27,7 +27,7 @@ public class MultiPlayerApp extends SinglePlayerApp {
         conservation = ContinueApp.conservations.get(getIntent().getIntExtra("NUMBER_CONSERVATION", 0));
 
         for (int i = 0; i < conservation.getQuantityPlayer(); i++) {
-            players.add(new Player());
+            players.add(new Human());
         }
         super.onCreate(savedInstanceState);
     }

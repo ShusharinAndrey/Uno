@@ -22,7 +22,7 @@ import com.shusharin.myapplication.card.Color;
 import com.shusharin.myapplication.card.SpecialCardWithBlack;
 import com.shusharin.myapplication.selected_games.ContinueApp;
 import com.shusharin.myapplication.user.Bot;
-import com.shusharin.myapplication.user.Player;
+import com.shusharin.myapplication.user.Human;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -38,7 +38,7 @@ public class SinglePlayerApp extends AppCompatActivity {
     protected static View blackView;
     protected static View blackCardsInHand;
     protected static Button startTurn;
-    private final Player player = new Player();
+    private final Human player = new Human();
     private final Bot bot = new Bot();
     protected SharedPreferences preferences;
     protected boolean isPressed = false;

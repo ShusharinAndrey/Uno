@@ -7,6 +7,7 @@ import com.shusharin.myapplication.R;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+@AllArgsConstructor
 @Getter
 public class Card {
     private final int id;
@@ -26,10 +27,5 @@ public class Card {
 
         //Или лучше ошибку выдавать?
         this.color = Color.BLACK;
-    }
-
-    public Card(int id, Color color) {
-        this.id = id;
-        this.color = color;
     }
 }

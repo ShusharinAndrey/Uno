@@ -28,4 +28,8 @@ public class Card {
         this.color = Color.BLACK;
     }
 
+    public Card(int id, Color color) {
+        this.id = id;
+        this.color = color;
+    }
 }

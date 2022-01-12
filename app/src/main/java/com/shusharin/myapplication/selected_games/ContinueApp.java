@@ -66,7 +66,7 @@ public class ContinueApp extends AppCompatActivity {
                         sharedPreferences.getInt("QUANTITY_PLAYER" + i, 0),
                         sharedPreferences.getInt("NUMBER_NAME" + i, 0),
                         sharedPreferences.getBoolean("IS_FINISHED" + i, true),
-                        Conservation.Modes.values()[sharedPreferences.getInt("MODE_NUMBER", 0)]
+                        Conservation.Modes.values()[sharedPreferences.getInt("MODE_NUMBER" + i, 0)]
                        )
                 );
             }

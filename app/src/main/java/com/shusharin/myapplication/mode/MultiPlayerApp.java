@@ -1,6 +1,7 @@
 package com.shusharin.myapplication.mode;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
@@ -19,6 +20,30 @@ public class MultiPlayerApp extends SinglePlayerApp {
         startTurn.setVisibility(View.VISIBLE);
         blackView.setVisibility(View.VISIBLE);
         blackCardsInHand.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void loadData() {
+        if (preferences.contains(conservation.getName())) {
+            loadCardArray("DECK_SIZE", deck, "DECK_CARD_ID", "DECK_CARD_COLOR");
+            loadCardArray("TABLE_SIZE", table, "TABLE_CARD_ID", "TABLE_CARD_COLOR");
+            for (int i = 0; i < players.size(); i++) {
+                loadCardArray("PLAYER_SIZE" + i, players.get(i).getCardsInHand(), "PLAYER_CARD_ID" + i, "PLAYER_CARD_COLOR" + i);
+            }
+        }
+    }
+
+    @Override
+    protected void saveData() {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(conservation.getName(), conservation.getName());
+
+        saveCardArray(editor, "DECK_SIZE", deck, "DECK_CARD_COLOR", "DECK_CARD_ID");
+        saveCardArray(editor, "TABLE_SIZE", table, "TABLE_CARD_COLOR", "TABLE_CARD_ID");
+        for (int i = 0; i < players.size(); i++) {
+            saveCardArray(editor, "PLAYER_SIZE" + i, players.get(i).getCardsInHand(), "PLAYER_CARD_COLOR" + i, "PLAYER_CARD_ID" + i);
+        }
+        editor.apply();
     }
 
     @Override

@@ -84,57 +84,44 @@ public class SinglePlayerApp extends AppCompatActivity {
 
     protected void loadData() {
         if (preferences.contains(conservation.getName())) {
-            deck.clear();
-            for (int i = 0; i < deck.size(); i++) {
-                deck.add(new CardViewer(new Card(
-                        preferences.getInt("DECK_CARD_ID" + i, 0),
-                        Color.values()[preferences.getInt("DECK_CARD_COLOR", 0)]
-                )));
-            }
-            for (int i = 0; i < table.size(); i++) {
-                table.add(new CardViewer(new Card(
-                        preferences.getInt("TABLE_CARD_ID" + i, 0),
-                        Color.values()[preferences.getInt("TABLE_CARD_COLOR", 0)]
-                )));
-            }
-            for (int i = 0; i < player.getCardsInHand().size(); i++) {
-                player.addCardsInHand(new CardViewer(new Card(
-                        preferences.getInt("PLAYER_CARD_ID" + i, 0),
-                        Color.values()[preferences.getInt("PLAYER_CARD_COLOR", 0)]
-                )));
-            }
-            for (int i = 0; i < bot.getCardsInHand().size(); i++) {
-                bot.addCardsInHand(new CardViewer(new Card(
-                        preferences.getInt("BOT_CARD_ID" + i, 0),
-                        Color.values()[preferences.getInt("BOT_CARD_COLOR", 0)]
-                )));
-            }
+            loadCardArray("DECK_SIZE", deck, "DECK_CARD_ID", "DECK_CARD_COLOR");
+            loadCardArray("TABLE_SIZE", table, "TABLE_CARD_ID", "TABLE_CARD_COLOR");
+            loadCardArray("PLAYER_SIZE", player.getCardsInHand(), "PLAYER_CARD_ID", "PLAYER_CARD_COLOR");
+            loadCardArray("BOT_SIZE", bot.getCardsInHand(), "BOT_CARD_ID", "BOT_CARD_COLOR");
+        }
+    }
+
+    protected void loadCardArray(String deck_size, ArrayList<CardViewer> deck, String deck_card_id, String deck_card_color) {
+        int size = 0;
+        if (preferences.contains(deck_size)) {
+            size = preferences.getInt(deck_size, 0);
+        }
+        for (int i = 0; i < size; i++) {
+            deck.add(new CardViewer(new Card(
+                    preferences.getInt(deck_card_id + i, 0),
+                    Color.values()[preferences.getInt(deck_card_color + i, 0)]
+            )));
         }
     }
 
     protected void saveData() {
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("saveName", conservation.getName());
+        editor.putString(conservation.getName(), conservation.getName());
 
-        for (int i = 0; i < deck.size(); i++) {
-            editor.putInt("DECK_CARD_COLOR" + i, deck.get(i).getCard().getColor().getNumber());
-            editor.putInt("DECK_CARD_ID" + i, deck.get(i).getCard().getId());
-        }
-        for (int i = 0; i < table.size(); i++) {
-            editor.putInt("TABLE_CARD_COLOR" + i, table.get(i).getCard().getColor().getNumber());
-            editor.putInt("TABLE_CARD_ID" + i, table.get(i).getCard().getId());
-        }
-        for (int i = 0; i < player.getCardsInHand().size(); i++) {
-            editor.putInt("PLAYER_CARD_COLOR" + i, player.getCardsInHand().get(i).getCard().getColor().getNumber());
-            editor.putInt("PLAYER_CARD_ID" + i, player.getCardsInHand().get(i).getCard().getId());
-        }
-        for (int i = 0; i < bot.getCardsInHand().size(); i++) {
-            editor.putInt("BOT_CARD_COLOR" + i, bot.getCardsInHand().get(i).getCard().getColor().getNumber());
-            editor.putInt("BOT_CARD_ID" + i, bot.getCardsInHand().get(i).getCard().getId());
-        }
+        saveCardArray(editor, "DECK_SIZE", deck, "DECK_CARD_COLOR", "DECK_CARD_ID");
+        saveCardArray(editor, "TABLE_SIZE", table, "TABLE_CARD_COLOR", "TABLE_CARD_ID");
+        saveCardArray(editor, "PLAYER_SIZE", player.getCardsInHand(), "PLAYER_CARD_COLOR", "PLAYER_CARD_ID");
+        saveCardArray(editor, "BOT_SIZE", bot.getCardsInHand(), "BOT_CARD_COLOR", "BOT_CARD_ID");
         editor.apply();
     }
 
+    protected void saveCardArray(SharedPreferences.Editor editor, String deck_size, ArrayList<CardViewer> deck, String deck_card_color, String deck_card_id) {
+        editor.putInt(deck_size, deck.size());
+        for (int i = 0; i < deck.size(); i++) {
+            editor.putInt(deck_card_color + i, deck.get(i).getCard().getColor().getNumber());
+            editor.putInt(deck_card_id + i, deck.get(i).getCard().getId());
+        }
+    }
 
     @Override
     protected void onPause() {

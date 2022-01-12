@@ -59,6 +59,7 @@ public class ContinueApp extends AppCompatActivity {
         adapterConservationsTwoPlayerOneField.notifyDataSetChanged();
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         if (sharedPreferences.contains("SIZE")) {
+            conservations.clear();
             for (int i = 0; i < sharedPreferences.getInt("SIZE", conservations.size()); i++) {
                 conservations.add(new Conservation(
                         sharedPreferences.getString(getString(R.string.Game) + i, ""),

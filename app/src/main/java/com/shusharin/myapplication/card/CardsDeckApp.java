@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,29 +54,32 @@ public class CardsDeckApp extends AppCompatActivity {
         LayoutInflater inflater = this.getLayoutInflater();
         //Создать с кнопками
         @SuppressLint("InflateParams") View viewDialog = inflater.inflate(R.layout.card_dialog, null);
+        Button positive = viewDialog.findViewById(R.id.positive);
 
-        viewDialog.findViewById(R.id.positive).setOnClickListener(arg0 -> {
-            if (!isPressed) {
-                isPressed = true;
-                //передать numberSelectionCard
-                SinglePlayerApp.table.add(cards.get(numberSelectionCard));
-                SinglePlayerApp.cardOnTheTable.setBackground(cards.get(numberSelectionCard).getDrawable(SinglePlayerApp.cardOnTheTable.getContext()));
+        Button positiveRed = viewDialog.findViewById(R.id.positiveRed);
+        Button positiveGreen = viewDialog.findViewById(R.id.positiveGreen);
+        Button positiveYellow = viewDialog.findViewById(R.id.positiveYellow);
+        Button positiveBlue = viewDialog.findViewById(R.id.positiveBlue);
 
-                cards.remove(numberSelectionCard);
+        positive.setOnClickListener(arg0 -> {
+            onClickPositive();
+        });
 
-                SinglePlayerApp.cardsInHand.setBackground(cards.get(0).getDrawable(this));
-                SinglePlayerApp.quantityCardsInHand.setText(String.valueOf(cards.size()));
-
-                cards = null;
-                finish();
-                overridePendingTransition(0, 0);
-                if (SinglePlayerApp.conservation.getMode() == Conservation.Modes.SINGLE) {
-                    SinglePlayerApp.afterSelectingCard();
-                } else {
-                    MultiPlayerApp.afterSelectingCard();
-                }
-                new Handler().postDelayed(() -> isPressed = false, 250);
-            }
+        positiveRed.setOnClickListener(arg0 -> {
+            cards.get(numberSelectionCard).getCard().setColor(Color.RED);
+            onClickPositive();
+        });
+        positiveGreen.setOnClickListener(arg0 -> {
+            cards.get(numberSelectionCard).getCard().setColor(Color.GREEN);
+            onClickPositive();
+        });
+        positiveYellow.setOnClickListener(arg0 -> {
+            cards.get(numberSelectionCard).getCard().setColor(Color.YELLOW);
+            onClickPositive();
+        });
+        positiveBlue.setOnClickListener(arg0 -> {
+            cards.get(numberSelectionCard).getCard().setColor(Color.BLUE);
+            onClickPositive();
         });
 
         viewDialog.findViewById(R.id.negative).setOnClickListener(arg0 -> {
@@ -91,12 +95,50 @@ public class CardsDeckApp extends AppCompatActivity {
         dialog.setOnShowListener(arg0 -> {
             CardViewer card = cards.get(numberSelectionCard);
             if (card.isAvailable()) {
+                if(card.getCard().getId() == 13 || card.getCard().getId() == 14){
+                    positive.setVisibility(View.INVISIBLE);
+                    positiveRed.setVisibility(View.VISIBLE);
+                    positiveGreen.setVisibility(View.VISIBLE);
+                    positiveYellow.setVisibility(View.VISIBLE);
+                    positiveBlue.setVisibility(View.VISIBLE);
+                }
+                else{
+                    positive.setVisibility(View.VISIBLE);
+                    positiveRed.setVisibility(View.INVISIBLE);
+                    positiveGreen.setVisibility(View.INVISIBLE);
+                    positiveYellow.setVisibility(View.INVISIBLE);
+                    positiveBlue.setVisibility(View.INVISIBLE);
+                }
                 viewDialog.findViewById(R.id.card).setBackground(card.getDrawable(this));
             }
         });
 
         dialog.setOnCancelListener(arg0 -> closeDialog());
         dialog.setOnDismissListener(arg0 -> closeDialog());
+    }
+
+    private void onClickPositive() {
+        if (!isPressed) {
+            isPressed = true;
+            //передать numberSelectionCard
+            SinglePlayerApp.table.add(cards.get(numberSelectionCard));
+            SinglePlayerApp.cardOnTheTable.setBackground(cards.get(numberSelectionCard).getDrawable(SinglePlayerApp.cardOnTheTable.getContext()));
+
+            cards.remove(numberSelectionCard);
+
+            SinglePlayerApp.cardsInHand.setBackground(cards.get(0).getDrawable(this));
+            SinglePlayerApp.quantityCardsInHand.setText(String.valueOf(cards.size()));
+
+            cards = null;
+            finish();
+            overridePendingTransition(0, 0);
+            if (SinglePlayerApp.conservation.getMode() == Conservation.Modes.SINGLE) {
+                SinglePlayerApp.afterSelectingCard();
+            } else {
+                MultiPlayerApp.afterSelectingCard();
+            }
+            new Handler().postDelayed(() -> isPressed = false, 250);
+        }
     }
 
     private void closeDialog() {

@@ -1,6 +1,6 @@
 package com.shusharin.myapplication.mode;
 
-import static com.shusharin.myapplication.user.Player.setAvailableCards;
+import static com.shusharin.myapplication.user.User.setAvailableCards;
 
 import android.content.Context;
 import android.content.Intent;
@@ -69,6 +69,7 @@ public class SinglePlayerApp extends AppCompatActivity {
             default:
                 turnBot();
         }
+        quantityCardsInHand.setText(String.valueOf(player.getCardsInHand().size()));
     }
 
     private static void turnBot() {
@@ -77,7 +78,6 @@ public class SinglePlayerApp extends AppCompatActivity {
             CardViewer cardViewer = bot.turn();
 
             table.add(cardViewer);
-            cardOnTheTable.setBackground(cardViewer.getDrawable(SinglePlayerApp.cardOnTheTable.getContext()));
             bot.getCardsInHand().remove(cardViewer);
 
 //            cardsInHand.setBackground(cards.get(0).getDrawable(this));
@@ -103,6 +103,8 @@ public class SinglePlayerApp extends AppCompatActivity {
                     turnBot();
                     break;
             }
+            cardOnTheTable.setBackground(cardViewer.getDrawable(SinglePlayerApp.cardOnTheTable.getContext()));
+
         }
     }
 

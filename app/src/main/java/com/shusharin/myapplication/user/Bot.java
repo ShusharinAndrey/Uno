@@ -5,15 +5,13 @@ import static com.shusharin.myapplication.card.Color.GREEN;
 import static com.shusharin.myapplication.card.Color.RED;
 import static com.shusharin.myapplication.card.Color.YELLOW;
 
-import android.widget.Toast;
-
 import com.shusharin.myapplication.card.CardViewer;
 import com.shusharin.myapplication.card.Color;
 
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-public class Bot extends Player {
+public class Bot extends User {
 
     private int countOfBlue;
     private int countOfGreen;

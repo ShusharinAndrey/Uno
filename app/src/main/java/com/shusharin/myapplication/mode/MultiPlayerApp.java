@@ -35,7 +35,7 @@ public class MultiPlayerApp extends SinglePlayerApp {
         super.onCreate(savedInstanceState);
     }
 
-    protected static ArrayList<CardViewer> getCardsInHandCurrentPlayer() {
+    protected ArrayList<CardViewer> getCardsInHandCurrentPlayer() {
         return players.get(conservation.getNumberPlayer()).getCardsInHand();
     }
 
@@ -57,7 +57,7 @@ public class MultiPlayerApp extends SinglePlayerApp {
             case 13:
                 giveNextTurn();
                 for (int i = 0; i < 4; i++) {
-                    getCardsInHandCurrentPlayer().addCardsInHand(peekCard());
+                    players.get(conservation.getNumberPlayer()).addCardsInHand(peekCard());
                 }
                 giveNextTurn();
                 // Выбор цвета из диалогового окна
@@ -65,7 +65,7 @@ public class MultiPlayerApp extends SinglePlayerApp {
             case 12:
                 giveNextTurn();
                 for (int i = 0; i < 2; i++) {
-                    getCardsInHandCurrentPlayer().addCardsInHand(peekCard());
+                    players.get(conservation.getNumberPlayer()).addCardsInHand(peekCard());
                 }
                 giveNextTurn();
                 break;

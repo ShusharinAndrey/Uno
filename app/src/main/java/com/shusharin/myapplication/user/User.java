@@ -5,7 +5,7 @@ import com.shusharin.myapplication.card.Color;
 
 import java.util.ArrayList;
 
-public abstract class Player {
+public abstract class User {
     ArrayList<CardViewer> cardsInHand = new ArrayList<>();
 
     public ArrayList<CardViewer> getCardsInHand() {

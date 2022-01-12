@@ -60,14 +60,15 @@ public class ContinueApp extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         if (sharedPreferences.contains("SIZE")) {
             for (int i = 0; i < sharedPreferences.getInt("SIZE", conservations.size()); i++) {
-//                conservations.add(new Conservation(
-//                        sharedPreferences.getInt("NUMBER_NAME" + i, 0),
-//                        sharedPreferences.getInt("NUMBER_PLAYER" + i, 0),
-//                        sharedPreferences.getString(getString(R.string.Game) + i, ""),
-//                       )
-//                );
-//                conservations.get(i).setFinished(sharedPreferences.getBoolean("IS_FINISHED"+i,false));
-//                conservations.get(i).setFirst(sharedPreferences.getBoolean("IS_FIRST"+i,false));
+                conservations.add(new Conservation(
+                        sharedPreferences.getString(getString(R.string.Game) + i, ""),
+                        sharedPreferences.getInt("NUMBER_PLAYER" + i, 0),
+                        sharedPreferences.getInt("QUANTITY_PLAYER" + i, 0),
+                        sharedPreferences.getInt("NUMBER_NAME" + i, 0),
+                        sharedPreferences.getBoolean("IS_FINISHED" + i, true),
+                        Conservation.Modes.values()[sharedPreferences.getInt("MODE_NUMBER", 0)]
+                       )
+                );
             }
         }
     }
@@ -100,7 +101,9 @@ public class ContinueApp extends AppCompatActivity {
             edit.putString(getString(R.string.Game) + i, conservations.get(i).getNameNoNumber());
             edit.putInt("NUMBER_NAME" + i, conservations.get(i).getNumberName());
             edit.putInt("NUMBER_PLAYER" + i, conservations.get(i).getNumberPlayer());
+            edit.putInt("QUANTITY_PLAYER" + i, conservations.get(i).getQuantityPlayer());
             edit.putBoolean("IS_FINISHED" + i, conservations.get(i).isFinished());
+            edit.putInt("MODE_NUMBER" + i, conservations.get(i).getMode().getNumber());
         }
         edit.apply();
     }

@@ -16,6 +16,7 @@ public class MultiPlayerApp extends SinglePlayerApp {
     private final ArrayList<Human> players = new ArrayList<>();
 
     public static void afterSelectingCard() {
+        isTakeCard = false;
         startTurn.setVisibility(View.VISIBLE);
         blackView.setVisibility(View.VISIBLE);
         blackCardsInHand.setVisibility(View.VISIBLE);
@@ -52,6 +53,11 @@ public class MultiPlayerApp extends SinglePlayerApp {
             conservation.setNumberPlayer(0);
         }
         //if специальная карта
+    }
+
+    @Override
+    protected void toAfterSelectingCard(){
+        afterSelectingCard();
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.shusharin.myapplication.mode;
 
+import static com.shusharin.myapplication.user.Player.setAvailableCards;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +10,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +33,8 @@ import java.util.Random;
 public class SinglePlayerApp extends AppCompatActivity {
     protected static final ArrayList<CardViewer> deck = new ArrayList<>();
     protected static final int quantityStartCard = 7;
+    private static final Human player = new Human();
+    private static final Bot bot = new Bot();
     public static ArrayList<CardViewer> table = new ArrayList<>();
     public static View cardOnTheTable;
     public static Conservation conservation;
@@ -38,13 +43,70 @@ public class SinglePlayerApp extends AppCompatActivity {
     protected static View blackView;
     protected static View blackCardsInHand;
     protected static Button startTurn;
-    private final Human player = new Human();
-    private final Bot bot = new Bot();
+    protected static boolean isPressed = false;
+    protected static boolean isTakeCard = false;
     protected SharedPreferences preferences;
-    protected boolean isPressed = false;
 
     public static void afterSelectingCard() {
-//Бот ходит здесь
+        isTakeCard = false;
+
+        switch (getCardOnTheTable().getCard().getId()) {
+
+        }
+
+        turnBot();
+    }
+
+    private static void turnBot() {
+        setAvailableCards(bot.getCardsInHand(), getCardOnTheTable());
+        if (takeCardIfNeedBot(bot.getCardsInHand())) {
+            CardViewer cardViewer = bot.turn();
+
+            table.add(cardViewer);
+            cardOnTheTable.setBackground(cardViewer.getDrawable(SinglePlayerApp.cardOnTheTable.getContext()));
+            bot.getCardsInHand().remove(cardViewer);
+
+//            cardsInHand.setBackground(cards.get(0).getDrawable(this));
+//            quantityCardsInHand.setText(String.valueOf(cards.size()));
+
+            if(getCardOnTheTable().getCard().getId() == 10 || getCardOnTheTable().getCard().getId() == 11 ){
+                turnBot();
+            }
+        }
+    }
+
+    protected static CardViewer peekCard() {
+        return peekCard(0);
+    }
+
+    protected static CardViewer peekCard(int index) {
+        CardViewer cardView = deck.get(index);
+        deck.remove(index);
+        return cardView;
+    }
+
+    protected static CardViewer getCardOnTheTable() {
+        return table.get(table.size() - 1);
+    }
+
+    protected static boolean takeCardIfNeedBot(ArrayList<CardViewer> cards) {
+        for (int i = 0; i < cards.size(); i++) {
+            if (cards.get(i).isAvailable()) {
+                return true;
+            }
+        }
+        CardViewer newCard = peekCard();
+        cards.add(newCard);
+        CardViewer cardOnTheTable = getCardOnTheTable();
+        if (!(newCard.getCard().getColor() == cardOnTheTable.getCard().getColor()
+                || newCard.getCard().getId() == cardOnTheTable.getCard().getId()
+                || newCard.getCard().getColor() == Color.BLACK)) {
+            new Handler().postDelayed(() -> isPressed = false, 1000);
+            cards.get(cards.size() - 1).setAvailable(false);
+            return false;
+        }
+
+        return true;
     }
 
     @Override
@@ -93,7 +155,6 @@ public class SinglePlayerApp extends AppCompatActivity {
         editor.apply();
     }
 
-
     @Override
     protected void onPause() {
         super.onPause();
@@ -105,22 +166,8 @@ public class SinglePlayerApp extends AppCompatActivity {
     }
 
     protected void setBackgroundHand() {
-        cardsInHand.setBackground(getCardsInHandCurrentPlayer().get(0).getDrawable(this));
+        cardsInHand.setBackground(getCardsInHandCurrentPlayer().get(getCardsInHandCurrentPlayer().size() - 1).getDrawable(this));
         quantityCardsInHand.setText(String.valueOf(getCardsInHandCurrentPlayer().size()));
-    }
-
-    protected CardViewer peekCard() {
-        return peekCard(0);
-    }
-
-    protected CardViewer peekCard(int index) {
-        CardViewer cardView = deck.get(index);
-        deck.remove(index);
-        return cardView;
-    }
-
-    protected CardViewer getCardOnTheTable() {
-        return table.get(table.size() - 1);
     }
 
     protected void mixDeck() {
@@ -161,25 +208,46 @@ public class SinglePlayerApp extends AppCompatActivity {
     public void onClickHand(View view) {
         if (!isPressed) {
             isPressed = true;
-            setAvailableCards(getCardsInHandCurrentPlayer());
-            CardsDeckApp.setCards(getCardsInHandCurrentPlayer());
-            Intent intent = new Intent(this, CardsDeckApp.class);
-            startActivity(intent);
-            overridePendingTransition(0, 0);
+            setAvailableCards(getCardsInHandCurrentPlayer(), getCardOnTheTable());
+            if (takeCardIfNeed(getCardsInHandCurrentPlayer())) {
+                CardsDeckApp.setCards(getCardsInHandCurrentPlayer());
+                Intent intent = new Intent(this, CardsDeckApp.class);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+            }
             new Handler().postDelayed(() -> isPressed = false, 250);
         }
     }
 
-    protected void setAvailableCards(ArrayList<CardViewer> cards) {
-        CardViewer cardOnTheTable = getCardOnTheTable();
-        for (int i = 0; i < cards.size(); i++) {
-            cards.get(i).setAvailable(
-                    cards.get(i).getCard().getColor() == cardOnTheTable.getCard().getColor()
-                            || cards.get(i).getCard().getId() == cardOnTheTable.getCard().getId()
-                            || cards.get(i).getCard().getColor() == Color.BLACK
-            );
+    protected boolean takeCardIfNeed(ArrayList<CardViewer> cards) {
+        if (!isTakeCard) {
+            isTakeCard = true;
+            for (int i = 0; i < cards.size(); i++) {
+                if (cards.get(i).isAvailable()) {
+                    return true;
+                }
+            }
+            CardViewer newCard = peekCard();
+            cards.add(newCard);
+            setBackgroundHand();
+            CardViewer cardOnTheTable = getCardOnTheTable();
+            if (!(newCard.getCard().getColor() == cardOnTheTable.getCard().getColor()
+                    || newCard.getCard().getId() == cardOnTheTable.getCard().getId()
+                    || newCard.getCard().getColor() == Color.BLACK)) {
+                Toast.makeText(this, "У вас нет подходящих карт для хода, ход передаётся следующему игроку", Toast.LENGTH_LONG).show();
+                new Handler().postDelayed(() -> isPressed = false, 1000);
+                toAfterSelectingCard();
+                cards.get(cards.size() - 1).setAvailable(false);
+                return false;
+            }
         }
+        return true;
     }
+
+    protected void toAfterSelectingCard() {
+        afterSelectingCard();
+    }
+
 
     public void onClickNo(View view) {
 

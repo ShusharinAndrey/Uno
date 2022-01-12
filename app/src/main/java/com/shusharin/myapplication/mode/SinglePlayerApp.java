@@ -47,6 +47,7 @@ public class SinglePlayerApp extends AppCompatActivity {
     protected static boolean isTakeCard = false;
     protected SharedPreferences preferences;
 
+
     public static void afterSelectingCard() {
         isTakeCard = false;
 
@@ -59,13 +60,11 @@ public class SinglePlayerApp extends AppCompatActivity {
             case 10:
                 break;
             case 13:
-                // Выбор цвета из диалогового окна
                 for (int i = 0; i < 4; i++) {
                     bot.addCardsInHand(peekCard());
                 }
                 break;
             case 14:
-                // Выбор цвета из диалогового окна
             default:
                 turnBot();
         }
@@ -79,9 +78,6 @@ public class SinglePlayerApp extends AppCompatActivity {
 
             table.add(cardViewer);
             bot.getCardsInHand().remove(cardViewer);
-
-//            cardsInHand.setBackground(cards.get(0).getDrawable(this));
-//            quantityCardsInHand.setText(String.valueOf(cards.size()));
 
             switch (getCardOnTheTable().getCard().getId()) {
                 case 12:
@@ -154,38 +150,68 @@ public class SinglePlayerApp extends AppCompatActivity {
         blackCardsInHand = findViewById(R.id.blackCardsInHand);
         startTurn = findViewById(R.id.startTurn);
 
-        preferences = getSharedPreferences(getIntent().getStringExtra("GAME"), Context.MODE_PRIVATE);
-
         conservation = ContinueApp.conservations.get(getIntent().getIntExtra("NUMBER_CONSERVATION", 0));
+        preferences = getSharedPreferences(getIntent().getStringExtra(conservation.getName()), Context.MODE_PRIVATE);
 
         if (conservation.isContinue()) {
             loadData();
         }
+        else
+        {
+            createDeck();
+            mixDeck();
 
-        if (conservation.isFinished()) {
+            handOutCard();
 
+            table.add(peekCard());
         }
 
-        createDeck();
-        mixDeck();
+        if (conservation.isFinished()) {
+           cardsInHand.setActivated(false);
+        }
 
-        handOutCard();
-
-        table.add(peekCard());
         cardOnTheTable.setBackground(getCardOnTheTable().getDrawable(this));
     }
 
     protected void loadData() {
         if (preferences.contains(conservation.getName())) {
+            loadCardArray("DECK_SIZE", deck, "DECK_CARD_ID", "DECK_CARD_COLOR");
+            loadCardArray("TABLE_SIZE", table, "TABLE_CARD_ID", "TABLE_CARD_COLOR");
+            loadCardArray("PLAYER_SIZE", player.getCardsInHand(), "PLAYER_CARD_ID", "PLAYER_CARD_COLOR");
+            loadCardArray("BOT_SIZE", bot.getCardsInHand(), "BOT_CARD_ID", "BOT_CARD_COLOR");
+        }
+    }
 
+    protected void loadCardArray(String deck_size, ArrayList<CardViewer> deck, String deck_card_id, String deck_card_color) {
+        int size = 0;
+        if (preferences.contains(deck_size)) {
+            size = preferences.getInt(deck_size, 0);
+        }
+        for (int i = 0; i < size; i++) {
+            deck.add(new CardViewer(new Card(
+                    preferences.getInt(deck_card_id + i, 0),
+                    Color.values()[preferences.getInt(deck_card_color + i, 0)]
+            )));
         }
     }
 
     protected void saveData() {
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("saveName", conservation.getName());
+        editor.putString(conservation.getName(), conservation.getName());
 
+        saveCardArray(editor, "DECK_SIZE", deck, "DECK_CARD_COLOR", "DECK_CARD_ID");
+        saveCardArray(editor, "TABLE_SIZE", table, "TABLE_CARD_COLOR", "TABLE_CARD_ID");
+        saveCardArray(editor, "PLAYER_SIZE", player.getCardsInHand(), "PLAYER_CARD_COLOR", "PLAYER_CARD_ID");
+        saveCardArray(editor, "BOT_SIZE", bot.getCardsInHand(), "BOT_CARD_COLOR", "BOT_CARD_ID");
         editor.apply();
+    }
+
+    protected void saveCardArray(SharedPreferences.Editor editor, String deck_size, ArrayList<CardViewer> deck, String deck_card_color, String deck_card_id) {
+        editor.putInt(deck_size, deck.size());
+        for (int i = 0; i < deck.size(); i++) {
+            editor.putInt(deck_card_color + i, deck.get(i).getCard().getColor().getNumber());
+            editor.putInt(deck_card_id + i, deck.get(i).getCard().getId());
+        }
     }
 
     @Override

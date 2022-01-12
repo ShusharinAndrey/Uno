@@ -9,7 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Conservation {
     private String name;
-    private int numberPlayer = -1;
+    private int numberPlayer = 0;
     private int quantityPlayer;
     private int numberName;
     private boolean isFinished;
@@ -23,8 +23,10 @@ public class Conservation {
         this.mode = mode;
     }
 
-    public Conservation(String name, int numberName, boolean isFinished, Modes mode, int quantityPlayer, int numberPlayer) {
+    public Conservation(String name, int numberPlayer, int quantityPlayer, int numberName, boolean isFinished, Modes mode) {
         this.name = name;
+        this.numberPlayer = numberPlayer;
+        this.quantityPlayer = quantityPlayer;
         this.numberName = numberName;
         this.isFinished = isFinished;
         this.mode = mode;
@@ -42,14 +44,16 @@ public class Conservation {
         return this.name;
     }
 
+    @AllArgsConstructor
+    @Getter
     public enum Modes {
-        SINGLE {
+        SINGLE(0) {
             @Override
             public int getString() {
                 return R.string.single;
             }
         },
-        MULTIPLAYER {
+        MULTIPLAYER(1) {
             @Override
             public int getString() {
                 return R.string.multiplayer;
@@ -57,5 +61,7 @@ public class Conservation {
         };
 
         public abstract int getString();
+
+        private int number;
     }
 }

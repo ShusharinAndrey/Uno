@@ -1,6 +1,7 @@
 package com.shusharin.myapplication.mode;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
@@ -25,9 +26,33 @@ public class MultiPlayerApp extends SinglePlayerApp {
     }
 
     @Override
+    protected void loadData() {
+        if (preferences.contains(conservation.getName())) {
+            loadCardArray("DECK_SIZE", deck, "DECK_CARD_ID", "DECK_CARD_COLOR");
+            loadCardArray("TABLE_SIZE", table, "TABLE_CARD_ID", "TABLE_CARD_COLOR");
+            for (int i = 0; i < players.size(); i++) {
+                loadCardArray("PLAYER_SIZE" + i, players.get(i).getCardsInHand(), "PLAYER_CARD_ID" + i, "PLAYER_CARD_COLOR" + i);
+            }
+        }
+    }
+
+    @Override
+    protected void saveData() {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(conservation.getName(), conservation.getName());
+
+        saveCardArray(editor, "DECK_SIZE", deck, "DECK_CARD_COLOR", "DECK_CARD_ID");
+        saveCardArray(editor, "TABLE_SIZE", table, "TABLE_CARD_COLOR", "TABLE_CARD_ID");
+        for (int i = 0; i < players.size(); i++) {
+            saveCardArray(editor, "PLAYER_SIZE" + i, players.get(i).getCardsInHand(), "PLAYER_CARD_COLOR" + i, "PLAYER_CARD_ID" + i);
+        }
+        editor.apply();
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        preferences = getSharedPreferences(getIntent().getStringExtra("GAME"), Context.MODE_PRIVATE);
         conservation = ContinueApp.conservations.get(getIntent().getIntExtra("NUMBER_CONSERVATION", 0));
+        preferences = getSharedPreferences(getIntent().getStringExtra(conservation.getName()), Context.MODE_PRIVATE);
 
         for (int i = 0; i < conservation.getQuantityPlayer(); i++) {
             players.add(new Human());
@@ -68,13 +93,12 @@ public class MultiPlayerApp extends SinglePlayerApp {
                     players.get(conservation.getNumberPlayer()).addCardsInHand(peekCard());
                 }
                 giveNextTurn();
-                break;
-            case 14:
-                // Выбор цвета из диалогового окна
-                giveNextTurn();
-                break;
+                break;// Выбор цвета из диалогового окна
             case 11:
                 isClockwise = !isClockwise;
+                giveNextTurn();
+                break;
+            default:
                 giveNextTurn();
                 break;
         }

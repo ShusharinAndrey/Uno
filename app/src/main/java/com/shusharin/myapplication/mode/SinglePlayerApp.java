@@ -59,24 +59,26 @@ public class SinglePlayerApp extends AppCompatActivity {
         blackCardsInHand = findViewById(R.id.blackCardsInHand);
         startTurn = findViewById(R.id.startTurn);
 
-        preferences = getSharedPreferences(getIntent().getStringExtra("GAME"), Context.MODE_PRIVATE);
-
         conservation = ContinueApp.conservations.get(getIntent().getIntExtra("NUMBER_CONSERVATION", 0));
+        preferences = getSharedPreferences(getIntent().getStringExtra(conservation.getName()), Context.MODE_PRIVATE);
 
         if (conservation.isContinue()) {
             loadData();
+        }
+        else
+        {
+            createDeck();
+            mixDeck();
+
+            handOutCard();
+
+            table.add(peekCard());
         }
 
         if (conservation.isFinished()) {
 
         }
 
-        createDeck();
-        mixDeck();
-
-        handOutCard();
-
-        table.add(peekCard());
         cardOnTheTable.setBackground(getCardOnTheTable().getDrawable(this));
     }
 

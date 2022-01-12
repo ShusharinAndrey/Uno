@@ -9,7 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Conservation {
     private String name;
-    private int numberPlayer = -1;
+    private int numberPlayer = 0;
     private int quantityPlayer;
     private int numberName;
     private boolean isFinished;

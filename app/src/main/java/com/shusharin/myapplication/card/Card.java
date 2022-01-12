@@ -6,12 +6,14 @@ import com.shusharin.myapplication.R;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 @AllArgsConstructor
 @Getter
 public class Card {
     private final int id;
-    private final Color color;
+    @Setter
+    private Color color;
 
     public Card(@NonNull CardWithColor cardWithColor, Color color) {
 

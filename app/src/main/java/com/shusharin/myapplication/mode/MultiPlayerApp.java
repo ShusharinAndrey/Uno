@@ -93,13 +93,12 @@ public class MultiPlayerApp extends SinglePlayerApp {
                     players.get(conservation.getNumberPlayer()).addCardsInHand(peekCard());
                 }
                 giveNextTurn();
-                break;
-            case 14:
-                // Выбор цвета из диалогового окна
-                giveNextTurn();
-                break;
+                break;// Выбор цвета из диалогового окна
             case 11:
                 isClockwise = !isClockwise;
+                giveNextTurn();
+                break;
+            default:
                 giveNextTurn();
                 break;
         }

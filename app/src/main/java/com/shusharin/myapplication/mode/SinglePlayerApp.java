@@ -60,13 +60,11 @@ public class SinglePlayerApp extends AppCompatActivity {
             case 10:
                 break;
             case 13:
-                // Выбор цвета из диалогового окна
                 for (int i = 0; i < 4; i++) {
                     bot.addCardsInHand(peekCard());
                 }
                 break;
             case 14:
-                // Выбор цвета из диалогового окна
             default:
                 turnBot();
         }
@@ -80,9 +78,6 @@ public class SinglePlayerApp extends AppCompatActivity {
 
             table.add(cardViewer);
             bot.getCardsInHand().remove(cardViewer);
-
-//            cardsInHand.setBackground(cards.get(0).getDrawable(this));
-//            quantityCardsInHand.setText(String.valueOf(cards.size()));
 
             switch (getCardOnTheTable().getCard().getId()) {
                 case 12:
@@ -172,7 +167,7 @@ public class SinglePlayerApp extends AppCompatActivity {
         }
 
         if (conservation.isFinished()) {
-
+           cardsInHand.setActivated(false);
         }
 
         cardOnTheTable.setBackground(getCardOnTheTable().getDrawable(this));

@@ -48,6 +48,9 @@ public class MultiPlayerApp extends SinglePlayerApp {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        conservation = ContinueApp.conservations.get(getIntent().getIntExtra("NUMBER_CONSERVATION", 0));
+        preferences = getSharedPreferences(getIntent().getStringExtra(conservation.getName()), Context.MODE_PRIVATE);
+
         for (int i = 0; i < conservation.getQuantityPlayer(); i++) {
             players.add(new Human());
         }

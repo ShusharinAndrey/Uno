@@ -58,6 +58,7 @@ public class ContinueApp extends AppCompatActivity {
         text.setText(R.string.title_continue);
         adapterConservationsTwoPlayerOneField.notifyDataSetChanged();
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        saveConservation();
         if (sharedPreferences.contains("SIZE")) {
             conservations.clear();
             for (int i = 0; i < sharedPreferences.getInt("SIZE", conservations.size()); i++) {
@@ -95,6 +96,10 @@ public class ContinueApp extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        saveConservation();
+    }
+
+    private void saveConservation() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor edit = sharedPreferences.edit();
         edit.putInt("SIZE", conservations.size());

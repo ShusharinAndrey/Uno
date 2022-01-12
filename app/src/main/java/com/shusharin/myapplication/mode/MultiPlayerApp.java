@@ -13,13 +13,15 @@ import com.shusharin.myapplication.user.Human;
 import java.util.ArrayList;
 
 public class MultiPlayerApp extends SinglePlayerApp {
-    private final ArrayList<Human> players = new ArrayList<>();
+    private static final ArrayList<Human> players = new ArrayList<>();
+    private static boolean isClockwise = true;
 
     public static void afterSelectingCard() {
         isTakeCard = false;
         startTurn.setVisibility(View.VISIBLE);
         blackView.setVisibility(View.VISIBLE);
         blackCardsInHand.setVisibility(View.VISIBLE);
+        reactForSpecialCard();
     }
 
     @Override
@@ -33,7 +35,7 @@ public class MultiPlayerApp extends SinglePlayerApp {
         super.onCreate(savedInstanceState);
     }
 
-    protected ArrayList<CardViewer> getCardsInHandCurrentPlayer() {
+    protected static ArrayList<CardViewer> getCardsInHandCurrentPlayer() {
         return players.get(conservation.getNumberPlayer()).getCardsInHand();
     }
 
@@ -46,13 +48,53 @@ public class MultiPlayerApp extends SinglePlayerApp {
         }
     }
 
-    public void giveNextTurn() {
-        if(conservation.getNumberPlayer() < conservation.getQuantityPlayer()-1){
-            conservation.setNumberPlayer(conservation.getNumberPlayer()+1);
-        }else{
-            conservation.setNumberPlayer(0);
+    public static void reactForSpecialCard() {
+        switch (getCardOnTheTable().getCard().getId()) {
+            case 10:
+                giveNextTurn();
+                giveNextTurn();
+                break;
+            case 13:
+                giveNextTurn();
+                for (int i = 0; i < 4; i++) {
+                    getCardsInHandCurrentPlayer().addCardsInHand(peekCard());
+                }
+                giveNextTurn();
+                // Выбор цвета из диалогового окна
+                break;
+            case 12:
+                giveNextTurn();
+                for (int i = 0; i < 2; i++) {
+                    getCardsInHandCurrentPlayer().addCardsInHand(peekCard());
+                }
+                giveNextTurn();
+                break;
+            case 14:
+                // Выбор цвета из диалогового окна
+                giveNextTurn();
+                break;
+            case 11:
+                isClockwise = !isClockwise;
+                giveNextTurn();
+                break;
         }
-        //if специальная карта
+
+    }
+
+    public static void giveNextTurn() {
+        if (isClockwise) {
+            if (conservation.getNumberPlayer() < conservation.getQuantityPlayer() - 1) {
+                conservation.setNumberPlayer(conservation.getNumberPlayer() + 1);
+            } else {
+                conservation.setNumberPlayer(0);
+            }
+        }else {
+            if (conservation.getNumberPlayer() > 0) {
+                conservation.setNumberPlayer(conservation.getNumberPlayer() - 1);
+            } else {
+                conservation.setNumberPlayer(conservation.getQuantityPlayer() - 1);
+            }
+        }
     }
 
     @Override
@@ -62,7 +104,6 @@ public class MultiPlayerApp extends SinglePlayerApp {
 
     @Override
     public void onClickStartTurn(View view) {
-        giveNextTurn();
         super.onClickStartTurn(view);
     }
 }

@@ -57,6 +57,19 @@ public class ContinueApp extends AppCompatActivity {
         TextView text = findViewById(R.id.tvTitle);
         text.setText(R.string.title_continue);
         adapterConservationsTwoPlayerOneField.notifyDataSetChanged();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if (sharedPreferences.contains("SIZE")) {
+            for (int i = 0; i < sharedPreferences.getInt("SIZE", conservations.size()); i++) {
+//                conservations.add(new Conservation(
+//                        sharedPreferences.getInt("NUMBER_NAME" + i, 0),
+//                        sharedPreferences.getInt("NUMBER_PLAYER" + i, 0),
+//                        sharedPreferences.getString(getString(R.string.Game) + i, ""),
+//                       )
+//                );
+//                conservations.get(i).setFinished(sharedPreferences.getBoolean("IS_FINISHED"+i,false));
+//                conservations.get(i).setFirst(sharedPreferences.getBoolean("IS_FIRST"+i,false));
+            }
+        }
     }
 
     @Override
@@ -117,6 +130,7 @@ public class ContinueApp extends AppCompatActivity {
 
                 intent.putExtra("GAME", conservation.getName());
                 intent.putExtra("NUMBER_CONSERVATION", ContinueApp.conservations.indexOf(conservation));
+                conservation.setContinue(true);
 
                 startActivity(intent);
                 finish();

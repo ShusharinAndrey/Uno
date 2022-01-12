@@ -1,5 +1,7 @@
 package com.shusharin.myapplication.user;
 
+import android.widget.Toast;
+
 import com.shusharin.myapplication.card.CardViewer;
 
 import lombok.NoArgsConstructor;
@@ -32,4 +34,12 @@ public class Bot extends Player {
         int max = Math.max(Math.max(countOfBlue, countOfGreen), Math.max(countOfRed, countOfYellow));
     }
 
+    public CardViewer turn(){
+        for (int i = 0; i < cardsInHand.size(); i++) {
+            if (cardsInHand.get(i).isAvailable()) {
+                return cardsInHand.get(i);
+            }
+        }
+        return cardsInHand.get(0);
+    }
 }

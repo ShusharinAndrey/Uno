@@ -63,6 +63,14 @@ public class SinglePlayerApp extends AppCompatActivity {
 
         conservation = ContinueApp.conservations.get(getIntent().getIntExtra("NUMBER_CONSERVATION", 0));
 
+        if (conservation.isContinue()) {
+            loadData();
+        }
+
+        if (conservation.isFinished()) {
+
+        }
+
         createDeck();
         mixDeck();
 
@@ -70,6 +78,26 @@ public class SinglePlayerApp extends AppCompatActivity {
 
         table.add(peekCard());
         cardOnTheTable.setBackground(getCardOnTheTable().getDrawable(this));
+    }
+
+    protected void loadData() {
+        if (preferences.contains(conservation.getName())) {
+
+        }
+    }
+
+    protected void saveData() {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("saveName", conservation.getName());
+
+        editor.apply();
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveData();
     }
 
     protected ArrayList<CardViewer> getCardsInHandCurrentPlayer() {

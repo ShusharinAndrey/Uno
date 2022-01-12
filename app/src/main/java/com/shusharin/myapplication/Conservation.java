@@ -13,9 +13,17 @@ public class Conservation {
     private int quantityPlayer;
     private int numberName;
     private boolean isFinished;
+    private boolean isContinue = false;
     private Modes mode;
 
-    public Conservation(String name, int numberName, boolean isFinished,Modes mode) {
+    public Conservation(String name, int numberName, boolean isFinished, Modes mode) {
+        this.name = name;
+        this.numberName = numberName;
+        this.isFinished = isFinished;
+        this.mode = mode;
+    }
+
+    public Conservation(String name, int numberName, boolean isFinished, Modes mode, int quantityPlayer, int numberPlayer) {
         this.name = name;
         this.numberName = numberName;
         this.isFinished = isFinished;
@@ -35,17 +43,19 @@ public class Conservation {
     }
 
     public enum Modes {
-        SINGLE{
+        SINGLE {
             @Override
             public int getString() {
                 return R.string.single;
             }
         },
-        MULTIPLAYER{
+        MULTIPLAYER {
             @Override
             public int getString() {
                 return R.string.multiplayer;
             }
         };
-        public abstract int getString();}
+
+        public abstract int getString();
+    }
 }

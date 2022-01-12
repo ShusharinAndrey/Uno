@@ -51,10 +51,24 @@ public class SinglePlayerApp extends AppCompatActivity {
         isTakeCard = false;
 
         switch (getCardOnTheTable().getCard().getId()) {
-
+            case 12:
+                for (int i = 0; i < 2; i++) {
+                    bot.addCardsInHand(peekCard());
+                }
+            case 11:
+            case 10:
+                break;
+            case 13:
+                // Выбор цвета из диалогового окна
+                for (int i = 0; i < 4; i++) {
+                    bot.addCardsInHand(peekCard());
+                }
+                break;
+            case 14:
+                // Выбор цвета из диалогового окна
+            default:
+                turnBot();
         }
-
-        turnBot();
     }
 
     private static void turnBot() {
@@ -69,8 +83,25 @@ public class SinglePlayerApp extends AppCompatActivity {
 //            cardsInHand.setBackground(cards.get(0).getDrawable(this));
 //            quantityCardsInHand.setText(String.valueOf(cards.size()));
 
-            if(getCardOnTheTable().getCard().getId() == 10 || getCardOnTheTable().getCard().getId() == 11 ){
-                turnBot();
+            switch (getCardOnTheTable().getCard().getId()) {
+                case 12:
+                    for (int i = 0; i < 2; i++) {
+                        player.addCardsInHand(peekCard());
+                    }
+                case 11:
+                case 10:
+                    turnBot();
+                    break;
+                case 14:
+                    getCardOnTheTable().getCard().setColor(bot.getPreferredColor());
+                    break;
+                case 13:
+                    getCardOnTheTable().getCard().setColor(bot.getPreferredColor());
+                    for (int i = 0; i < 4; i++) {
+                        player.addCardsInHand(peekCard());
+                    }
+                    turnBot();
+                    break;
             }
         }
     }

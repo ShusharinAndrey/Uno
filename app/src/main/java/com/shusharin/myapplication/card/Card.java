@@ -6,11 +6,13 @@ import com.shusharin.myapplication.R;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 public class Card {
     private final int id;
-    private final Color color;
+    @Setter
+    private Color color;
 
     public Card(@NonNull CardWithColor cardWithColor, Color color) {
 
@@ -27,5 +29,4 @@ public class Card {
         //Или лучше ошибку выдавать?
         this.color = Color.BLACK;
     }
-
 }

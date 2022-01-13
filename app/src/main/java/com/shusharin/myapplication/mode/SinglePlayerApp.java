@@ -82,6 +82,7 @@ public class SinglePlayerApp extends AppCompatActivity {
 
             table.add(cardViewer);
             bot.getCardsInHand().remove(cardViewer);
+            cardOnTheTable.setBackground(cardViewer.getDrawable(SinglePlayerApp.cardOnTheTable.getContext()));
 
             switch (getCardOnTheTable().getCard().getId()) {
                 case 12:
@@ -94,16 +95,18 @@ public class SinglePlayerApp extends AppCompatActivity {
                     break;
                 case 14:
                     getCardOnTheTable().getCard().setColor(bot.getPreferredColor());
+                    cardOnTheTable.setBackground(cardViewer.getDrawable(SinglePlayerApp.cardOnTheTable.getContext()));
                     break;
                 case 13:
                     getCardOnTheTable().getCard().setColor(bot.getPreferredColor());
+                    cardOnTheTable.setBackground(cardViewer.getDrawable(SinglePlayerApp.cardOnTheTable.getContext()));
                     for (int i = 0; i < 4; i++) {
                         player.addCardsInHand(peekCard());
                     }
                     turnBot();
                     break;
             }
-            cardOnTheTable.setBackground(cardViewer.getDrawable(SinglePlayerApp.cardOnTheTable.getContext()));
+
 
         }
         quantityCardsInHandTop.setText(String.valueOf(bot.getCardsInHand().size()));

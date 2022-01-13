@@ -161,7 +161,7 @@ public class ContinueApp extends AppCompatActivity {
         dialog.setOnShowListener(arg0 -> {
             TextView nameGameText = viewDialog.findViewById(R.id.nameGame);
             TextView modeText = viewDialog.findViewById(R.id.mode);
-            TextView numberPlayerText = viewDialog.findViewById(R.id.player);
+            TextView numberPlayerText = viewDialog.findViewById(R.id.playerTop);
             nameGameText.setText(String.format(getString(R.string.Party) + getString(R.string.enter_stoke), conservation.getName()));
             numberPlayerText.setText(String.format(getString(R.string.Players), conservation.getQuantityPlayer()));
             modeText.setText(conservation.getMode().getString());

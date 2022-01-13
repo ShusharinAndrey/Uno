@@ -45,6 +45,10 @@ public class SinglePlayerApp extends AppCompatActivity {
     protected static Button startTurn;
     protected static boolean isPressed = false;
     protected static boolean isTakeCard = false;
+    public static TextView playerCurrent;
+    public static TextView currentPlayerStart;
+    public static TextView quantityCardsInHandTop;
+    public static TextView playerTop;
     protected SharedPreferences preferences;
 
 
@@ -78,6 +82,7 @@ public class SinglePlayerApp extends AppCompatActivity {
 
             table.add(cardViewer);
             bot.getCardsInHand().remove(cardViewer);
+            cardOnTheTable.setBackground(cardViewer.getDrawable(SinglePlayerApp.cardOnTheTable.getContext()));
 
             switch (getCardOnTheTable().getCard().getId()) {
                 case 12:
@@ -90,18 +95,21 @@ public class SinglePlayerApp extends AppCompatActivity {
                     break;
                 case 14:
                     getCardOnTheTable().getCard().setColor(bot.getPreferredColor());
+                    cardOnTheTable.setBackground(cardViewer.getDrawable(SinglePlayerApp.cardOnTheTable.getContext()));
                     break;
                 case 13:
                     getCardOnTheTable().getCard().setColor(bot.getPreferredColor());
+                    cardOnTheTable.setBackground(cardViewer.getDrawable(SinglePlayerApp.cardOnTheTable.getContext()));
                     for (int i = 0; i < 4; i++) {
                         player.addCardsInHand(peekCard());
                     }
                     turnBot();
                     break;
             }
-            cardOnTheTable.setBackground(cardViewer.getDrawable(SinglePlayerApp.cardOnTheTable.getContext()));
+
 
         }
+        quantityCardsInHandTop.setText(String.valueOf(bot.getCardsInHand().size()));
     }
 
     protected static CardViewer peekCard() {
@@ -150,14 +158,28 @@ public class SinglePlayerApp extends AppCompatActivity {
         blackCardsInHand = findViewById(R.id.blackCardsInHand);
         startTurn = findViewById(R.id.startTurn);
 
+        playerTop = findViewById(R.id.playerTop);
+        currentPlayerStart = findViewById(R.id.currentPlayerStart);
+        quantityCardsInHandTop = findViewById(R.id.quantityCardsInHandTop);
+
+        playerCurrent = findViewById(R.id.currentPlayer);
+
+        playerCurrent.setText(R.string.you);
+
+        playerTop.setText(R.string.bot);
+
+        currentPlayerStart.setText(R.string.player);
+
         conservation = ContinueApp.conservations.get(getIntent().getIntExtra("NUMBER_CONSERVATION", 0));
         preferences = getSharedPreferences(getIntent().getStringExtra(conservation.getName()), Context.MODE_PRIVATE);
 
+        table.clear();
+        bot.getCardsInHand().clear();
+        player.getCardsInHand().clear();
+
         if (conservation.isContinue()) {
             loadData();
-        }
-        else
-        {
+        } else {
             createDeck();
             mixDeck();
 
@@ -166,8 +188,10 @@ public class SinglePlayerApp extends AppCompatActivity {
             table.add(peekCard());
         }
 
+        quantityCardsInHandTop.setText(String.valueOf(bot.getCardsInHand().size()));
+
         if (conservation.isFinished()) {
-           cardsInHand.setActivated(false);
+            cardsInHand.setActivated(false);
         }
 
         cardOnTheTable.setBackground(getCardOnTheTable().getDrawable(this));
@@ -316,6 +340,7 @@ public class SinglePlayerApp extends AppCompatActivity {
         startTurn.setVisibility(View.GONE);
         blackView.setVisibility(View.GONE);
         blackCardsInHand.setVisibility(View.GONE);
+        currentPlayerStart.setVisibility(View.GONE);
         setBackgroundHand();
     }
 }

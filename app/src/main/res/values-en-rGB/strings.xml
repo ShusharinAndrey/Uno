@@ -39,4 +39,7 @@
     <string name="fourPlayer">Four players</string>
     <string name="newGame">New game</string>
     <string name="continueGame">Continue</string>
+    <string name="you">You</string>
+    <string name="bot">Bot</string>
+    <string name="player">Player</string>
 </resources>

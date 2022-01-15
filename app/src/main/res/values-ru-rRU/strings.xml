@@ -23,4 +23,23 @@
     <string name="uno_game_rules">Правила игры UNO</string>
     <string name="reference">Правила игры UNO</string>
     <string name="object_of_the_game">Победа в игре</string>
+    <string name="title_continue">Загрузка</string>
+    <string name="Move_rules">Основные</string>
+    <string name="Game">Игра</string>
+    <string name="title_activity_main">Главное меню</string>
+    <string name="title_activity_new_game">Новая игра</string>
+    <string name="multiplayer">Мультиплеер</string>
+    <string name="single">Одиночная игра</string>
+    <string name="open">Открыть</string>
+    <string name="Party">Партия</string>
+    <string name="Players">Игроков %d</string>
+    <string name="twoPlayer">Два игрока</string>
+    <string name="threePlayer">Три игрока</string>
+    <string name="fourPlayer">Четыре игрока</string>
+    <string name="newGame">Новая игра</string>
+    <string name="continueGame">Продоложить</string>
+    <string name="start_turn">Начать ход</string>
+    <string name="you">В</string>
+    <string name="bot">Бот</string>
+    <string name="player">Игрок</string>
 </resources>

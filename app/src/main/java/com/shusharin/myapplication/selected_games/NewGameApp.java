@@ -75,7 +75,7 @@ public class NewGameApp extends MainActivity {
         });
         dialog = builder.create();
         RadioGroup radioGroup = viewDialog.findViewById(R.id.quantityPlayers);
-        TextView numberPlayerText = viewDialog.findViewById(R.id.player);
+        TextView numberPlayerText = viewDialog.findViewById(R.id.playerTop);
         radioGroup.setVisibility(View.VISIBLE);
 
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> {

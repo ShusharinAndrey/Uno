@@ -2,32 +2,37 @@ package com.shusharin.myapplication.card;
 
 import com.shusharin.myapplication.R;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
 public enum Color {
-    BLUE {
+    BLUE(0) {
         @Override
         int getIdDrawable() {
             return R.drawable.blue;
         }
     },
-    GREEN {
+    GREEN(1) {
         @Override
         int getIdDrawable() {
             return R.drawable.green;
         }
     },
-    RED {
+    RED(2) {
         @Override
         int getIdDrawable() {
             return R.drawable.red;
         }
     },
-    YELLOW {
+    YELLOW(3) {
         @Override
         int getIdDrawable() {
             return R.drawable.yellow;
         }
     },
-    BLACK {
+    BLACK(4) {
         @Override
         int getIdDrawable() {
             return R.drawable.black;
@@ -35,4 +40,6 @@ public enum Color {
     };
 
     abstract int getIdDrawable();
+
+    private int number;
 }

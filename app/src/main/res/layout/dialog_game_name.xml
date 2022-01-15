@@ -37,14 +37,14 @@
         app:autoSizeMaxTextSize="30sp"
         app:autoSizeMinTextSize="1sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@id/player"
+        app:layout_constraintBottom_toTopOf="@id/playerTop"
         app:layout_constraintEnd_toEndOf="@id/text_frame"
         app:layout_constraintHeight_percent="0.2"
         app:layout_constraintStart_toStartOf="@id/text_frame"
         app:layout_constraintTop_toTopOf="@id/text_frame" />
 
     <TextView
-        android:id="@+id/player"
+        android:id="@+id/playerTop"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="5dp"
@@ -69,7 +69,7 @@
         app:autoSizeMinTextSize="1sp"
         app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="@id/text_frame"
-        app:layout_constraintEnd_toStartOf="@+id/player"
+        app:layout_constraintEnd_toStartOf="@+id/playerTop"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/text_frame"
         app:layout_constraintTop_toBottomOf="@+id/nameGame"

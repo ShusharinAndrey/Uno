@@ -1,9 +1,5 @@
 package com.shusharin.myapplication;
 
-import static com.shusharin.myapplication.card.CardWithColor.FOUR;
-import static com.shusharin.myapplication.card.CardWithColor.THREE;
-import static com.shusharin.myapplication.card.CardWithColor.TWO;
-
 import org.junit.After;
 import org.junit.Test;
 
@@ -13,7 +9,6 @@ import com.shusharin.myapplication.card.Card;
 import com.shusharin.myapplication.card.CardViewer;
 import com.shusharin.myapplication.card.CardWithColor;
 import com.shusharin.myapplication.card.Color;
-import com.shusharin.myapplication.card.SpecialCardWithBlack;
 import com.shusharin.myapplication.mode.SinglePlayerApp;
 import com.shusharin.myapplication.user.Bot;
 
@@ -32,7 +27,7 @@ public class UnitTests {
 
     @Test
     public void cardCheckTest() {
-        CardViewer cardViewer = new CardViewer(new Card(TWO, Color.YELLOW));
+        CardViewer cardViewer = new CardViewer(new Card(CardWithColor.TWO, Color.YELLOW));
         Card card = cardViewer.getCard();
         assertNotNull(card);
         assertEquals(2, card.getId());
@@ -44,9 +39,9 @@ public class UnitTests {
     @Test
     public void preferredColorTest() {
         Bot bot = new Bot();
-        CardViewer card1 = new CardViewer(new Card(TWO, Color.YELLOW));
-        CardViewer card2 = new CardViewer(new Card(THREE, Color.YELLOW));
-        CardViewer card3 = new CardViewer(new Card(FOUR, Color.BLUE));
+        CardViewer card1 = new CardViewer(new Card(CardWithColor.TWO, Color.YELLOW));
+        CardViewer card2 = new CardViewer(new Card(CardWithColor.THREE, Color.YELLOW));
+        CardViewer card3 = new CardViewer(new Card(CardWithColor.FOUR, Color.BLUE));
         bot.addCardsInHand(card1);
         bot.addCardsInHand(card2);
         bot.addCardsInHand(card3);

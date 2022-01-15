@@ -46,4 +46,5 @@
     <string name="you">You</string>
     <string name="bot">Bot</string>
     <string name="player">Player</string>
+    <string name="winner">"Winner: "</string>
 </resources>

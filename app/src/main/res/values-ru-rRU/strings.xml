@@ -39,7 +39,8 @@
     <string name="newGame">Новая игра</string>
     <string name="continueGame">Продоложить</string>
     <string name="start_turn">Начать ход</string>
-    <string name="you">В</string>
+    <string name="you">Вы</string>
     <string name="bot">Бот</string>
     <string name="player">Игрок</string>
+    <string name="winner">"Победитель: "</string>
 </resources>

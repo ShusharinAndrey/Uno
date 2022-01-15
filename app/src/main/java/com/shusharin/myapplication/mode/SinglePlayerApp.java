@@ -55,6 +55,20 @@ public class SinglePlayerApp extends AppCompatActivity {
     public static void afterSelectingCard() {
         isTakeCard = false;
 
+        if (player.getCardsInHand().size() == 0) {
+            blackView.setVisibility(View.VISIBLE);
+            startTurn.setActivated(false);
+            playerTop.setText(R.string.winner);
+            String winner = playerTop.getText().toString();
+            playerTop.setText(R.string.you);
+            String player = playerTop.getText().toString();
+            currentPlayerStart.setText(winner + player);
+            currentPlayerStart.setVisibility(View.VISIBLE);
+            currentPlayerStart.setTextSize(20);
+            conservation.setFinished(true);
+            return;
+        }
+
         switch (getCardOnTheTable().getCard().getId()) {
             case 12:
                 for (int i = 0; i < 2; i++) {
@@ -78,6 +92,20 @@ public class SinglePlayerApp extends AppCompatActivity {
 
 
     private static void turnBot() {
+        if (bot.getCardsInHand().size() == 0) {
+            blackView.setVisibility(View.VISIBLE);
+            startTurn.setActivated(false);
+            playerTop.setText(R.string.winner);
+            String winner = playerTop.getText().toString();
+            playerTop.setText(R.string.bot);
+            String player = playerTop.getText().toString();
+            currentPlayerStart.setText(winner + player);
+            currentPlayerStart.setVisibility(View.VISIBLE);
+            currentPlayerStart.setTextSize(20);
+            conservation.setFinished(true);
+            return;
+        }
+
         setAvailableCards(bot.getCardsInHand(), getCardOnTheTable());
         if (takeCardIfNeedBot(bot.getCardsInHand())) {
             CardViewer cardViewer = bot.turn();

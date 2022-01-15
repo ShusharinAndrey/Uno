@@ -26,6 +26,22 @@ public class MultiPlayerApp extends SinglePlayerApp {
     private static Context context;
 
     public static void afterSelectingCard() {
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getCardsInHand().size() == 0) {
+                blackView.setVisibility(View.VISIBLE);
+                startTurn.setActivated(false);
+                playerTop.setText(R.string.winner);
+                String winner = playerTop.getText().toString();
+                playerTop.setText(R.string.player);
+                String player = playerTop.getText().toString();
+                currentPlayerStart.setText(winner + player + conservation.getNumberPlayer());
+                currentPlayerStart.setVisibility(View.VISIBLE);
+                currentPlayerStart.setTextSize(20);
+                conservation.setFinished(true);
+                return;
+            }
+        }
+
         isTakeCard = false;
         startTurn.setVisibility(View.VISIBLE);
         blackView.setVisibility(View.VISIBLE);

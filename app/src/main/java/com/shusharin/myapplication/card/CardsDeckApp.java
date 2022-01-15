@@ -126,7 +126,9 @@ public class CardsDeckApp extends AppCompatActivity {
 
             cards.remove(numberSelectionCard);
 
-            SinglePlayerApp.cardsInHand.setBackground(cards.get(0).getDrawable(this));
+            if (cards.size() != 0) {
+                SinglePlayerApp.cardsInHand.setBackground(cards.get(0).getDrawable(this));
+            }
             SinglePlayerApp.quantityCardsInHand.setText(String.valueOf(cards.size()));
 
             cards = null;

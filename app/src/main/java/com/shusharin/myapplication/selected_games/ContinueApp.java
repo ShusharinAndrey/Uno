@@ -57,6 +57,22 @@ public class ContinueApp extends AppCompatActivity {
         TextView text = findViewById(R.id.tvTitle);
         text.setText(R.string.title_continue);
         adapterConservationsTwoPlayerOneField.notifyDataSetChanged();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        saveConservation();
+        if (sharedPreferences.contains("SIZE")) {
+            conservations.clear();
+            for (int i = 0; i < sharedPreferences.getInt("SIZE", conservations.size()); i++) {
+                conservations.add(new Conservation(
+                        sharedPreferences.getString(getString(R.string.Game) + i, ""),
+                        sharedPreferences.getInt("NUMBER_PLAYER" + i, 0),
+                        sharedPreferences.getInt("QUANTITY_PLAYER" + i, 0),
+                        sharedPreferences.getInt("NUMBER_NAME" + i, 0),
+                        sharedPreferences.getBoolean("IS_FINISHED" + i, true),
+                        Conservation.Modes.values()[sharedPreferences.getInt("MODE_NUMBER" + i, 0)]
+                       )
+                );
+            }
+        }
     }
 
     @Override
@@ -80,6 +96,10 @@ public class ContinueApp extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        saveConservation();
+    }
+
+    private void saveConservation() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor edit = sharedPreferences.edit();
         edit.putInt("SIZE", conservations.size());
@@ -87,7 +107,9 @@ public class ContinueApp extends AppCompatActivity {
             edit.putString(getString(R.string.Game) + i, conservations.get(i).getNameNoNumber());
             edit.putInt("NUMBER_NAME" + i, conservations.get(i).getNumberName());
             edit.putInt("NUMBER_PLAYER" + i, conservations.get(i).getNumberPlayer());
+            edit.putInt("QUANTITY_PLAYER" + i, conservations.get(i).getQuantityPlayer());
             edit.putBoolean("IS_FINISHED" + i, conservations.get(i).isFinished());
+            edit.putInt("MODE_NUMBER" + i, conservations.get(i).getMode().getNumber());
         }
         edit.apply();
     }
@@ -117,6 +139,7 @@ public class ContinueApp extends AppCompatActivity {
 
                 intent.putExtra("GAME", conservation.getName());
                 intent.putExtra("NUMBER_CONSERVATION", ContinueApp.conservations.indexOf(conservation));
+                conservation.setContinue(true);
 
                 startActivity(intent);
                 finish();
@@ -138,7 +161,7 @@ public class ContinueApp extends AppCompatActivity {
         dialog.setOnShowListener(arg0 -> {
             TextView nameGameText = viewDialog.findViewById(R.id.nameGame);
             TextView modeText = viewDialog.findViewById(R.id.mode);
-            TextView numberPlayerText = viewDialog.findViewById(R.id.player);
+            TextView numberPlayerText = viewDialog.findViewById(R.id.playerTop);
             nameGameText.setText(String.format(getString(R.string.Party) + getString(R.string.enter_stoke), conservation.getName()));
             numberPlayerText.setText(String.format(getString(R.string.Players), conservation.getQuantityPlayer()));
             modeText.setText(conservation.getMode().getString());

@@ -62,7 +62,7 @@ public class SinglePlayerApp extends AppCompatActivity {
             String winner = playerTop.getText().toString();
             playerTop.setText(R.string.you);
             String player = playerTop.getText().toString();
-            currentPlayerStart.setText(winner + player + conservation.getNumberPlayer());
+            currentPlayerStart.setText(winner + player);
             currentPlayerStart.setVisibility(View.VISIBLE);
             currentPlayerStart.setTextSize(30);
             conservation.setFinished(true);
@@ -99,7 +99,7 @@ public class SinglePlayerApp extends AppCompatActivity {
             String winner = playerTop.getText().toString();
             playerTop.setText(R.string.bot);
             String player = playerTop.getText().toString();
-            currentPlayerStart.setText(winner + player + conservation.getNumberPlayer());
+            currentPlayerStart.setText(winner + player);
             currentPlayerStart.setVisibility(View.VISIBLE);
             currentPlayerStart.setTextSize(30);
             conservation.setFinished(true);

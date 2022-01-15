@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class SinglePlayerApp extends AppCompatActivity {
-    protected static final ArrayList<CardViewer> deck = new ArrayList<>();
+    public static final ArrayList<CardViewer> deck = new ArrayList<>();
     protected static final int quantityStartCard = 7;
     private static final Human player = new Human();
     private static final Bot bot = new Bot();
@@ -72,8 +72,10 @@ public class SinglePlayerApp extends AppCompatActivity {
             default:
                 turnBot();
         }
+        quantityCardsInHandTop.setText(String.valueOf(bot.getCardsInHand().size()));
         quantityCardsInHand.setText(String.valueOf(player.getCardsInHand().size()));
     }
+
 
     private static void turnBot() {
         setAvailableCards(bot.getCardsInHand(), getCardOnTheTable());
@@ -110,6 +112,7 @@ public class SinglePlayerApp extends AppCompatActivity {
 
         }
         quantityCardsInHandTop.setText(String.valueOf(bot.getCardsInHand().size()));
+        quantityCardsInHand.setText(String.valueOf(player.getCardsInHand().size()));
     }
 
     protected static CardViewer peekCard() {
@@ -253,7 +256,7 @@ public class SinglePlayerApp extends AppCompatActivity {
         quantityCardsInHand.setText(String.valueOf(getCardsInHandCurrentPlayer().size()));
     }
 
-    protected void mixDeck() {
+    public static void mixDeck() {
         Random random = new Random();
         CardViewer card;
         for (int i = 0; i < deck.size() - 1; i++) {
@@ -271,9 +274,9 @@ public class SinglePlayerApp extends AppCompatActivity {
         }
     }
 
-    protected void createDeck() {
+    public static void createDeck() {
         deck.clear();
-        for (int j = 1; j < Color.values().length - 1; j++) {
+        for (int j = 0; j < Color.values().length - 1; j++) {
             for (int i = 0; i < CardWithColor.values().length; i++) {
                 for (int k = 0; k < 2; k++) {
                     deck.add(new CardViewer(new Card(CardWithColor.values()[i], Color.values()[j])));

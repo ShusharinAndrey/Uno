@@ -64,7 +64,7 @@ public class SinglePlayerApp extends AppCompatActivity {
             String player = playerTop.getText().toString();
             currentPlayerStart.setText(winner + player);
             currentPlayerStart.setVisibility(View.VISIBLE);
-            currentPlayerStart.setTextSize(30);
+            currentPlayerStart.setTextSize(20);
             conservation.setFinished(true);
             return;
         }
@@ -101,7 +101,7 @@ public class SinglePlayerApp extends AppCompatActivity {
             String player = playerTop.getText().toString();
             currentPlayerStart.setText(winner + player);
             currentPlayerStart.setVisibility(View.VISIBLE);
-            currentPlayerStart.setTextSize(30);
+            currentPlayerStart.setTextSize(20);
             conservation.setFinished(true);
             return;
         }

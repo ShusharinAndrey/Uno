@@ -12,3 +12,8 @@ You can read read gamerules via [GAMERULES.md](https://github.com/ShusharinAndre
 ## C4
 
 ![c4model](https://user-images.githubusercontent.com/83543428/149623046-8353e61c-bb19-48ea-9c4f-6566900334f0.png)
+
+## Creating apk file
+
+In android studio select Build -> Build Bundle(s) / APK(s) -> Build APK(s)
+You can then find the apk file in \Uno\app\build\outputs\apk\debug

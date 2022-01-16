@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorSecond">#BFFF0000</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#673AB7</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="grey">#8E8E8E</color>
+    <color name="continueText">#B300E4FF</color>
+    <color name="continueTextPressed">#80FFFFFF</color>
+    <color name="colorMollisFlavum">#8CFFFF96</color>
+    <color name="Button">#BF000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="white_edit_text">#4DFFFFFF</color>
+    <color name="stroke_white">#636363</color>
+    <color name="text_color_edit_text">#99000000</color>
+</resources>

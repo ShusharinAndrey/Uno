@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D2FF0000"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/UNO"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:autoSizeMaxTextSize="150sp"
+        android:autoSizeMinTextSize="4sp"
+        android:autoSizeTextType="uniform"
+        android:gravity="center"
+        android:text="@string/uno"
+        android:textColor="#EDFFE928"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/newGame"
+        style="@style/button_style"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:onClick="onClickNewGame"
+        android:text="@string/newGame"
+        app:layout_constraintBottom_toTopOf="@+id/continueGame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/UNO"
+        app:layout_constraintTop_toTopOf="@+id/top"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <Button
+        android:id="@+id/continueGame"
+        style="@style/button_style"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:onClick="onClickContinue"
+        android:text="@string/continueGame"
+        app:layout_constraintBottom_toTopOf="@+id/reference"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/UNO"
+        app:layout_constraintTop_toBottomOf="@+id/newGame"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <Button
+        android:id="@+id/reference"
+        style="@style/button_style"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:onClick="onClickReference"
+        android:text="@string/reference"
+        app:layout_constraintBottom_toTopOf="@+id/bottom2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/UNO"
+        app:layout_constraintTop_toBottomOf="@+id/continueGame"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottom2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

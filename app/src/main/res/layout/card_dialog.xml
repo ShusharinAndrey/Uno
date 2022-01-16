@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minHeight="600dp"
+    android:background="@color/grey">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/All_item"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <Button
+            android:id="@+id/positiveYellow"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:autoSizeMaxTextSize="100dp"
+            android:autoSizeMinTextSize="1dp"
+            android:autoSizeTextType="uniform"
+            android:foreground="@drawable/yellow"
+            android:textColor="@color/black"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/positiveRed"
+            app:layout_constraintHeight_percent="0.1"
+            app:layout_constraintStart_toEndOf="@+id/negative"
+            app:layout_constraintTop_toBottomOf="@+id/positiveBlue"
+            app:layout_constraintWidth_percent="0.2" />
+
+        <Button
+            android:id="@+id/positiveGreen"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:foreground="@drawable/green"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.1"
+            app:layout_constraintStart_toEndOf="@+id/positiveBlue"
+            app:layout_constraintTop_toBottomOf="@+id/positiveRed"
+            app:layout_constraintWidth_percent="0.2" />
+
+        <View
+            android:id="@+id/card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/positive"
+            app:layout_constraintDimensionRatio="@string/card_aspect_ratio"
+            app:layout_constraintEnd_toEndOf="@+id/All_item"
+            app:layout_constraintStart_toStartOf="@+id/All_item"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.7" />
+
+        <Button
+            android:id="@+id/positive"
+            style="@style/button_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Выбрать"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/negative"
+            app:layout_constraintTop_toBottomOf="@+id/card" />
+
+        <Button
+            android:id="@+id/positiveBlue"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:foreground="@drawable/blue"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/positiveYellow"
+            app:layout_constraintEnd_toStartOf="@+id/positiveRed"
+            app:layout_constraintHeight_percent="0.1"
+            app:layout_constraintStart_toEndOf="@+id/negative"
+            app:layout_constraintTop_toBottomOf="@+id/card"
+            app:layout_constraintWidth_percent="0.2" />
+
+        <Button
+            android:id="@+id/positiveRed"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:foreground="@drawable/red"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/positiveGreen"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.1"
+            app:layout_constraintStart_toEndOf="@+id/positiveBlue"
+            app:layout_constraintTop_toBottomOf="@+id/card"
+            app:layout_constraintWidth_percent="0.2" />
+
+        <Button
+            android:id="@+id/negative"
+            style="@style/button_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Отмена"
+            app:layout_constraintBottom_toBottomOf="@+id/positive"
+            app:layout_constraintEnd_toStartOf="@+id/positive"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/positive" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,5 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="thin">2dp</dimen>
+    <dimen name="thick">3dp</dimen>
+</resources>

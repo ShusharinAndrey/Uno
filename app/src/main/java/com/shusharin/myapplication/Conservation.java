@@ -60,8 +60,8 @@ public class Conservation {
             }
         };
 
-        public abstract int getString();
-
         private int number;
+
+        public abstract int getString();
     }
 }

@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,19 +39,25 @@ public class SinglePlayerApp extends AppCompatActivity {
     private static final Bot bot = new Bot();
     public static ArrayList<CardViewer> table = new ArrayList<>();
     public static View cardOnTheTable;
+    public static View cardOnTheTableBack;
     public static Conservation conservation;
     public static View cardsInHand;
     public static TextView quantityCardsInHand;
+    public static TextView playerCurrent;
+    public static TextView currentPlayerStart;
+    public static TextView quantityCardsInHandTop;
+    public static TextView playerTop;
     protected static View blackView;
     protected static View blackCardsInHand;
     protected static Button startTurn;
     protected static boolean isPressed = false;
     protected static boolean isTakeCard = false;
-    public static TextView playerCurrent;
-    public static TextView currentPlayerStart;
-    public static TextView quantityCardsInHandTop;
-    public static TextView playerTop;
     protected SharedPreferences preferences;
+    private Animation growFromMiddleXAxis;
+    private Animation scaleDown;
+    private Animation scaleUp;
+    private Animation shrinkToMiddleXAxis;
+    private int durationAnimation = 125;
 
 
     public static void afterSelectingCard() {
@@ -177,12 +185,49 @@ public class SinglePlayerApp extends AppCompatActivity {
         return true;
     }
 
+    public static void mixDeck() {
+        Random random = new Random();
+        CardViewer card;
+        for (int i = 0; i < deck.size() - 1; i++) {
+            int index = random.nextInt(i + 1);
+            card = peekCard(index);
+            deck.add(index, peekCard(i));
+            deck.add(i, card);
+        }
+    }
+
+    public static void createDeck() {
+        deck.clear();
+        for (int j = 0; j < Color.values().length - 1; j++) {
+            for (int i = 0; i < CardWithColor.values().length; i++) {
+                for (int k = 0; k < 2; k++) {
+                    deck.add(new CardViewer(new Card(CardWithColor.values()[i], Color.values()[j])));
+                }
+            }
+        }
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < SpecialCardWithBlack.values().length; j++) {
+                deck.add(new CardViewer(new Card(SpecialCardWithBlack.values()[j])));
+            }
+        }
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        growFromMiddleXAxis = AnimationUtils.loadAnimation(this, R.anim.grow_from_middle_x_axis);
+        shrinkToMiddleXAxis = AnimationUtils.loadAnimation(this, R.anim.shrink_to_middle_x_axis);
+
+        growFromMiddleXAxis.setDuration(durationAnimation);
+        shrinkToMiddleXAxis.setDuration(durationAnimation);
+
+
+
         cardOnTheTable = findViewById(R.id.cardOnTheTable);
+        cardOnTheTableBack = findViewById(R.id.cardOnTheTableCover);
         cardsInHand = findViewById(R.id.cardsInHand);
         quantityCardsInHand = findViewById(R.id.quantityCardsInHand);
         blackView = findViewById(R.id.blackView);
@@ -226,6 +271,7 @@ public class SinglePlayerApp extends AppCompatActivity {
         }
 
         cardOnTheTable.setBackground(getCardOnTheTable().getDrawable(this));
+        cardOnTheTable.setVisibility(View.INVISIBLE);
     }
 
     protected void loadData() {
@@ -284,38 +330,10 @@ public class SinglePlayerApp extends AppCompatActivity {
         quantityCardsInHand.setText(String.valueOf(getCardsInHandCurrentPlayer().size()));
     }
 
-    public static void mixDeck() {
-        Random random = new Random();
-        CardViewer card;
-        for (int i = 0; i < deck.size() - 1; i++) {
-            int index = random.nextInt(i + 1);
-            card = peekCard(index);
-            deck.add(index, peekCard(i));
-            deck.add(i, card);
-        }
-    }
-
     protected void handOutCard() {
         for (int i = 0; i < quantityStartCard; i++) {
             player.addCardsInHand(peekCard());
             bot.addCardsInHand(peekCard());
-        }
-    }
-
-    public static void createDeck() {
-        deck.clear();
-        for (int j = 0; j < Color.values().length - 1; j++) {
-            for (int i = 0; i < CardWithColor.values().length; i++) {
-                for (int k = 0; k < 2; k++) {
-                    deck.add(new CardViewer(new Card(CardWithColor.values()[i], Color.values()[j])));
-                }
-            }
-        }
-
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < SpecialCardWithBlack.values().length; j++) {
-                deck.add(new CardViewer(new Card(SpecialCardWithBlack.values()[j])));
-            }
         }
     }
 
@@ -368,10 +386,23 @@ public class SinglePlayerApp extends AppCompatActivity {
     }
 
     public void onClickStartTurn(View view) {
-        startTurn.setVisibility(View.GONE);
-        blackView.setVisibility(View.GONE);
-        blackCardsInHand.setVisibility(View.GONE);
-        currentPlayerStart.setVisibility(View.GONE);
-        setBackgroundHand();
+        if (!isPressed) {
+            isPressed = true;
+
+            cardOnTheTableBack.startAnimation(shrinkToMiddleXAxis);
+
+            new Handler().postDelayed(() -> {
+                cardOnTheTableBack.setVisibility(View.INVISIBLE);
+                cardOnTheTable.setVisibility(View.VISIBLE);
+                cardOnTheTable.startAnimation(growFromMiddleXAxis);
+            }, durationAnimation);
+
+            startTurn.setVisibility(View.GONE);
+            blackView.setVisibility(View.GONE);
+            blackCardsInHand.setVisibility(View.GONE);
+            currentPlayerStart.setVisibility(View.GONE);
+            setBackgroundHand();
+            new Handler().postDelayed(() -> isPressed = false, 250);
+        }
     }
 }

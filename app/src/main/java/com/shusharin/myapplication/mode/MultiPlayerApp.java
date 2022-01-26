@@ -10,22 +10,20 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.shusharin.myapplication.R;
-import com.shusharin.myapplication.card.CardViewer;
 import com.shusharin.myapplication.selected_games.ContinueApp;
-import com.shusharin.myapplication.user.Human;
 
 import java.util.ArrayList;
 
 public class MultiPlayerApp extends SinglePlayerApp {
     private static final ArrayList<Human> players = new ArrayList<>();
-    public static TextView quantityCardsInHandLeft;
-    public static TextView playerLeft;
-    public static TextView quantityCardsInHandRight;
-    public static TextView playerRight;
+    public TextView quantityCardsInHandLeft;
+    public TextView playerLeft;
+    public TextView quantityCardsInHandRight;
+    public TextView playerRight;
     private static boolean isClockwise;
-    private static Context context;
 
-    public static void afterSelectingCard() {
+    @Override
+    public void afterSelectingCard(boolean isOnlyBot) {
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).getCardsInHand().size() == 0) {
                 blackView.setVisibility(View.VISIBLE);
@@ -50,7 +48,7 @@ public class MultiPlayerApp extends SinglePlayerApp {
         reactForSpecialCard();
     }
 
-    public static void reactForSpecialCard() {
+    public void reactForSpecialCard() {
         switch (getCardOnTheTable().getCard().getId()) {
             case 10:
                 giveNextTurn();
@@ -59,7 +57,7 @@ public class MultiPlayerApp extends SinglePlayerApp {
             case 13:
                 giveNextTurn();
                 for (int i = 0; i < 4; i++) {
-                    players.get(conservation.getNumberPlayer()).addCardsInHand(peekCard());
+                    players.get(conservation.getNumberPlayer()).getCardsInHand().add(peekCard());
                 }
                 giveNextTurn();
                 // Выбор цвета из диалогового окна
@@ -67,7 +65,7 @@ public class MultiPlayerApp extends SinglePlayerApp {
             case 12:
                 giveNextTurn();
                 for (int i = 0; i < 2; i++) {
-                    players.get(conservation.getNumberPlayer()).addCardsInHand(peekCard());
+                    players.get(conservation.getNumberPlayer()).getCardsInHand().add(peekCard());
                 }
                 giveNextTurn();
                 break;// Выбор цвета из диалогового окна
@@ -84,7 +82,7 @@ public class MultiPlayerApp extends SinglePlayerApp {
     }
 
     @SuppressLint("DefaultLocale")
-    private static void setNameAndQuantityCards() {
+    private void setNameAndQuantityCards() {
 
         int topId;
         int leftId = -1;
@@ -146,7 +144,7 @@ public class MultiPlayerApp extends SinglePlayerApp {
     }
 
     @SuppressLint("DefaultLocale")
-    private static void setCurrentPlayer(String player) {
+    private void setCurrentPlayer(String player) {
         currentPlayerStart.setText(String.format("%s%d", player, conservation.getNumberPlayer()));
         playerCurrent.setText(String.format("%s%d", player, conservation.getNumberPlayer()));
     }
@@ -184,6 +182,7 @@ public class MultiPlayerApp extends SinglePlayerApp {
 
         for (int i = 0; i < conservation.getQuantityPlayer(); i++) {
             players.add(new Human());
+            players.get(i).setCardsInHand(new Hand());
         }
         isClockwise = true;
 
@@ -195,7 +194,7 @@ public class MultiPlayerApp extends SinglePlayerApp {
         setNameAndQuantityCards();
     }
 
-    protected ArrayList<CardViewer> getCardsInHandCurrentPlayer() {
+    protected Hand getCardsInHandCurrentPlayer() {
         return players.get(conservation.getNumberPlayer()).getCardsInHand();
     }
 
@@ -203,14 +202,9 @@ public class MultiPlayerApp extends SinglePlayerApp {
     protected void handOutCard() {
         for (int i = 0; i < quantityStartCard; i++) {
             for (int j = 0; j < conservation.getQuantityPlayer(); j++) {
-                players.get(j).addCardsInHand(peekCard());
+                players.get(j).getCardsInHand().add(peekCard());
             }
         }
-    }
-
-    @Override
-    protected void toAfterSelectingCard() {
-        afterSelectingCard();
     }
 
     @Override

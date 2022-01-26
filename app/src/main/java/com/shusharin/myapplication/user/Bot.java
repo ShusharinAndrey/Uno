@@ -8,16 +8,21 @@ import static com.shusharin.myapplication.card.Color.YELLOW;
 import com.shusharin.myapplication.card.CardViewer;
 import com.shusharin.myapplication.card.Color;
 
+import java.util.ArrayList;
+
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-public class Bot extends User {
+public class Bot extends User<ArrayList<CardViewer>> {
 
     private int countOfBlue;
     private int countOfGreen;
     private int countOfYellow;
     private int countOfRed;
     private Color preferredColor;
+
+    public Bot() {
+        cardsInHand = new ArrayList<>();
+    }
 
     private void colorQuantity() {
         for (CardViewer cardInHand : cardsInHand) {

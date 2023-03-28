@@ -17,3 +17,8 @@ You can read read gamerules via [GAMERULES.md](https://github.com/ShusharinAndre
 
 In android studio select Build -> Build Bundle(s) / APK(s) -> Build APK(s)
 You can then find the apk file in \Uno\app\build\outputs\apk\debug
+
+<a href="https://scan.coverity.com/projects/shusharinandrey-uno">
+  <img alt="Coverity Scan Build Status"
+       src="https://scan.coverity.com/projects/27939/badge.svg"/>
+</a>
